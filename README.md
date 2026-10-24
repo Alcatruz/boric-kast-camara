@@ -2,6 +2,8 @@
 
 Boric y Kast en la Cámara de Diputados de Chile, y lo que su paso por ella dice sobre la polarización. Usa las estimaciones de B-Call por período del análisis [Siete Cámaras en dos dimensiones](https://alcatruz.github.io/bcall-camara-2002-2026/).
 
+**📖 [Leer el análisis →](https://alcatruz.github.io/boric-kast-camara/)**
+
 El post está en `index.html` y se publica con GitHub Pages.
 
 ## Contenido
