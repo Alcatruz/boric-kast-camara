@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los dos extremos</title>
+<meta name="description" content="Boric y Kast en la Cámara de Diputados, y lo que su paso por ella dice sobre la polarización chilena.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="Los dos extremos">
+<meta property="og:description" content="Boric y Kast en la Cámara de Diputados, y lo que su paso por ella dice sobre la polarización chilena.">
+<meta property="og:type" content="article">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --izq: #e34948;
+  --der: #2a78d6;
+  --sen: #eb6834;
+  --neutro: #b5b3ab;
+  --link: #1c5cab;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --izq: #e66767;
+    --der: #3987e5;
+    --sen: #d95926;
+    --neutro: #5d5c57;
+    --link: #86b6ef;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --izq: #e66767;
+  --der: #3987e5;
+  --sen: #d95926;
+  --neutro: #5d5c57;
+  --link: #86b6ef;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.6; }
+main { padding: 0 16px 64px; }
+.col { max-width: 680px; margin: 0 auto; }
+.ancho { max-width: 920px; margin: 0 auto; }
+
+header.cabecera { padding: 56px 0 8px; }
+.antetitulo { font-family: var(--sans); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+h1 { font-family: var(--sans); font-weight: 700; font-size: clamp(36px, 7vw, 52px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px; text-wrap: balance; }
+.bajada { font-size: 21px; line-height: 1.45; color: var(--ink-2); margin: 0 0 20px; text-wrap: pretty; }
+.firma { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0; }
+.firma a { color: var(--ink-2); }
+h2 { font-family: var(--sans); font-size: 24px; line-height: 1.25; font-weight: 700; margin: 56px 0 12px; letter-spacing: -0.005em; }
+h3 { font-family: var(--sans); font-size: 17px; font-weight: 700; margin: 32px 0 8px; }
+p { margin: 0 0 18px; text-wrap: pretty; }
+a { color: var(--link); text-underline-offset: 2px; }
+.var { font-family: var(--sans); font-weight: 600; font-size: 0.92em; }
+
+.recuadro { border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 18px 22px; margin: 28px 0; font-size: 17px; line-height: 1.55; }
+.recuadro p:last-child { margin-bottom: 0; }
+
+figure { margin: 32px auto 36px; }
+.grafico { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 8px 4px; overflow: hidden; }
+.lienzo { width: 100%; }
+figcaption { font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 10px 4px 0; max-width: 680px; }
+figcaption b { color: var(--ink); }
+
+.tabla-envoltura { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 14px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+tr:last-child td { border-bottom: 0; }
+td.vacio { color: var(--muted); }
+
+ul.notas { padding-left: 20px; font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+ul.notas li { margin-bottom: 8px; }
+.ref { font-size: 16px; line-height: 1.55; color: var(--ink-2); padding-left: 2em; text-indent: -2em; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0 0; }
+footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding: 20px 0 0; }
+
+@media (max-width: 600px) {
+  body { font-size: 17.5px; }
+  header.cabecera { padding-top: 36px; }
+  .bajada { font-size: 19px; }
+  h2 { font-size: 21px; margin-top: 44px; }
+  .grafico { padding: 8px 2px 2px; border-radius: 8px; }
+  .recuadro { padding: 14px 16px; }
+  table { font-size: 12.5px; }
+  th, td { padding: 7px 6px; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Comportamiento legislativo · Chile</p>
+  <h1>Los dos extremos</h1>
+  <p class="bajada">Boric y Kast en la Cámara de Diputados, y lo que su paso por ella dice sobre la polarización chilena.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 24 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>De los 120 diputados de 2014-2018, el que votaba más a la izquierda era Gabriel Boric y el que votaba más a la derecha, José Antonio Kast. Ocho años después de terminado ese período, los dos habían llegado a La Moneda, uno detrás del otro.</p>
+
+  <p>No eran solo los extremos. También estaban entre los que menos votaban con los suyos. Con B-Call, que separa la posición de un diputado de la dispersión de sus votos (Toro-Maureira et al., 2025), Boric tuvo el <span class="var">d2</span> más alto de la Cámara y Kast quedó en el percentil 96. Boric votó con la mayoría de su bloque el 75% de las veces, la cifra más baja de la sala, y Kast el 89%, en el quinto más bajo.</p>
+
+  <p>¿Es casualidad que los dos polos menos disciplinados de una Cámara terminen gobernando? ¿O dice algo de cómo se polarizó la política chilena? Para no forzar los datos hay que mirar tres cosas por separado, cómo votaban ellos, cómo cambió la sala y qué pasa con el resto de los diputados que suben.</p>
+
+  <div class="recuadro">
+    <p><b>Cómo se mide.</b> Uso las estimaciones de B-Call por período legislativo de un <a href="https://alcatruz.github.io/bcall-camara-2002-2026/">análisis anterior</a>, con todas las votaciones de proyectos de ley desde 2002. <span class="var">d1</span> es la posición del diputado y <span class="var">d2</span> la dispersión de sus votos alrededor de ella. La lealtad al bloque es la proporción de sus votos que van con la mayoría de su bloque B-Call. Como cada período se estima por separado, entre períodos comparo percentiles.</p>
+  </div>
+
+  <h2>Los dos polos de 2014-2018</h2>
+  <p>La Figura 1 muestra la Cámara de ese período. Casi todos los diputados se ordenan en dos nubes, una por bloque, y con poca dispersión. Boric y Kast quedan en los bordes de cada nube y además arriba, donde están los votos más dispersos. Es decir, eran a la vez los más alejados del centro y de los que menos se parecían a su propio bloque.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-polos" class="lienzo" role="img" aria-label="Posición y dispersión de cada diputado en 2014-2018, con Boric y Kast destacados"></div></div>
+  <figcaption><b>Figura 1.</b> Posición (<span class="var">d1</span>) y dispersión del voto (<span class="var">d2</span>) de los 120 diputados de 2014-2018. Al pasar el cursor sobre un punto aparecen el nombre, el partido y la lealtad al bloque.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Dos trayectorias</h2>
+  <p>Los caminos fueron distintos (Figura 2). Kast pasó doce años como un diputado UDI ordenado. En 2010-2014, con Piñera en el gobierno, votó con su bloque el 98,7% de las veces y su <span class="var">d2</span> estuvo en el percentil 12. El cambio llega en 2014-2018, con la derecha en la oposición. Kast dejó la UDI en ese período, pero su distancia con el bloque no empezó ahí. Votaba contra la mayoría de la derecha en el 11,4% de los casos antes de que la Cámara lo registrara como independiente, en julio de 2017, y en el 8,8% después.</p>
+
+  <p>Boric llegó en 2014 como independiente, fuera de la Nueva Mayoría, y terminó ese período como el diputado con los votos más dispersos de la sala. En 2018-2022, ya con la bancada del Frente Amplio en la oposición a Piñera, votó con su bloque el 90% de las veces y su <span class="var">d2</span> bajó al percentil 78.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-trayectorias" class="lienzo" role="img" aria-label="Percentil de d2 y de lealtad al bloque de Boric y Kast por período"></div></div>
+  <figcaption><b>Figura 2.</b> Percentil de <span class="var">d2</span> (izquierda) y de lealtad al bloque (derecha) de Boric y Kast en cada período en que fueron diputados. Un percentil alto de <span class="var">d2</span> indica votos más dispersos que el resto de la sala y uno bajo de lealtad, menos votos con la mayoría del propio bloque.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Dónde rompían</h2>
+  <p>Las rupturas no fueron parejas. Clasifiqué las votaciones por la materia de su proyecto y medí cuántas veces cada uno votó contra la mayoría de su bloque en cada materia (Figura 3). En 2014-2018 Boric lo hizo en el 37% de las votaciones de seguridad, cuando la mediana de la Cámara fue de 7%. Dos tercios de esos votos se concentran en un solo proyecto, la llamada agenda corta contra robos y hurtos que envió el gobierno de Bachelet en 2015. También se apartó en economía (26%) y en lo político-institucional (23%). En los temas valóricos, en cambio, votó casi siempre con la izquierda.</p>
+
+  <p>Kast hizo lo contrario. En seguridad casi nunca se apartó de la derecha (3%), y sus rupturas se repartieron en otras materias, como la ley de garantías de la niñez, el Acuerdo de Vida en Común y varias votaciones de presupuesto. El título del Acuerdo de Vida en Común no menciona la unión civil, así que el clasificador lo dejó fuera de los temas valóricos y cuenta en otras materias. Doce años antes, en 2002-2006, Kast ya había votado contra su bloque en dos de cada tres votaciones de la nueva ley de Matrimonio Civil.</p>
+
+  <p>Es la misma excepción que aparecía en el análisis anterior. Desde 2014, en seguridad la izquierda en el gobierno vota menos parejo que la derecha en la oposición. Boric es el caso más extremo de esa izquierda.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-materias" class="lienzo" role="img" aria-label="Porcentaje de votos contra el propio bloque por materia, Boric, Kast y mediana de la Cámara, 2014-2018"></div></div>
+  <figcaption><b>Figura 3.</b> Porcentaje de los votos de Boric y de Kast que fueron contra la mayoría de su bloque en 2014-2018, por materia, junto a la mediana de la Cámara. Las materias no son excluyentes. En temas valóricos cada uno tiene unas 25 votaciones.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Una sala que se partió</h2>
+  <p>Mientras tanto la Cámara cambió. Las votaciones de bloque contra bloque, aquellas en que la mayoría de un bloque vota distinto que la mayoría del otro, pasaron del 28% en 2002-2006 al 53% en 2022-2026, y en lo que va de 2026-2030 llegan al 63% (Figura 4). No es que los partidos se desordenaran. El índice de Rice de los principales partidos se mantiene entre 0,84 y 1 en todo el período (Tabla 1), y la lealtad mediana al bloque se movió poco, entre 90% y 94%. Lo que cambió es cuántas veces los dos bloques chocan.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-polarizacion" class="lienzo" role="img" aria-label="Porcentaje de votaciones de bloque contra bloque por período"></div></div>
+  <figcaption><b>Figura 4.</b> Porcentaje de votaciones de proyectos de ley en que la mayoría del bloque de izquierda y la del bloque de derecha votaron en sentido contrario, por período. 2026-2030 llega hasta septiembre de 2026.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="tabla-envoltura">
+    <table id="tabla-rice"><thead></thead><tbody></tbody></table>
+  </div>
+  <figcaption><b>Tabla 1.</b> Índice de Rice promedio por partido y período. Vale 1 cuando todos los diputados del partido votan igual. Solo partidos con al menos 50 votaciones en el período.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>¿Patrón o excepción?</h2>
+  <p>Boric y Kast son dos casos, y con dos casos no se prueba nada. Por eso miré a todos los diputados que dejaron la Cámara entre 2006 y 2026. De 364, 59 llegaron después al Senado y 2 a la Presidencia. En un modelo logit con el último período de cada uno, ser más extremo se asocia con subir. Pasar del centro al borde de la sala multiplica por 2,8 las chances, aunque el resultado está al límite de la significancia (p = 0,048). La dispersión del voto, en cambio, no tiene relación con subir (p = 0,98), y quienes llegaron al Senado están en el cuartil más disperso tan seguido como el resto (Figura 5). El ascenso premia estar en los polos, no votar disperso.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-carreras" class="lienzo" role="img" aria-label="Extremismo y dispersión de los diputados que dejaron la Cámara, según si llegaron al Senado o a la Presidencia"></div></div>
+  <figcaption><b>Figura 5.</b> Distancia al centro de la sala y dispersión del voto, en percentiles, de los 364 diputados que dejaron la Cámara entre 2006 y 2026, medidas en su último período. En color, quienes llegaron después al Senado o a la Presidencia.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Lo que dice y lo que no</h2>
+  <p>Con dos casos no se puede decir que la conducta en la Cámara anticipó el presente. Pero el cuadro calza. En el mismo lapso en que la sala se partió en dos bloques que chocan cada vez más, las carreras que suben vienen de los polos, y los dos diputados más alejados del centro en 2014-2018 llegaron al gobierno, uno detrás del otro. Los dos que menos votaban con su bloque terminaron conduciéndolo.</p>
+
+  <h3>Datos, código y decisiones</h3>
+  <ul class="notas">
+    <li>Estimaciones de B-Call por período del <a href="https://alcatruz.github.io/bcall-camara-2002-2026/">análisis anterior</a>, sobre 18.407 votaciones de proyectos de ley de la Cámara entre marzo de 2002 y septiembre de 2026 (opendata.camara.cl).</li>
+    <li>El lado de un bloque o partido en una votación es la opción, a favor o en contra, que eligió la mayoría de sus miembros. Si empatan, la votación no cuenta. Abstenerse cuando el bloque tiene lado cuenta como no ir con él.</li>
+    <li>El Rice se calcula por partido y votación, con partidos que tienen al menos tres diputados votando, y se promedia en el período. El partido es la última militancia que registra la Cámara dentro de cada período, por eso Kast aparece como independiente en 2014-2018 y Boric como Convergencia Social en 2018-2022.</li>
+    <li>Las materias se asignaron por el título de cada proyecto, con diccionarios armados mirando solo una mitad de los proyectos con descriptores temáticos de la BCN y medidos una sola vez en la otra mitad, de 1.380 proyectos. El acuerdo con los descriptores, medido con kappa, es de 0,77 en seguridad, 0,69 en economía, 0,78 en lo político-institucional y 0,80 en temas valóricos, donde la muestra de prueba tiene solo 8 casos.</li>
+    <li>Las carreras salen de los cargos que registra la BCN. Se cuentan los diputados cuyo último período en la Cámara empezó en 2022 o antes y que asumieron después como senadores o presidentes. El modelo es un logit con el percentil de distancia al centro, el de <span class="var">d2</span> y la participación en su último período, más efectos fijos por ese período.</li>
+    <li>El código y los datos agregados están en el <a href="https://github.com/Alcatruz/boric-kast-camara">repositorio</a>.</li>
+  </ul>
+
+  <h3>Referencia</h3>
+  <p class="ref">Toro-Maureira, S., Reutter, J., Valenzuela, L., Alcatruz, D. y Valenzuela, M. (2025). B-Call: integrating ideological position and voting cohesion in legislative behavior. <i>Frontiers in Political Science, 7</i>, 1670089. <a href="https://doi.org/10.3389/fpos.2025.1670089">https://doi.org/10.3389/fpos.2025.1670089</a></p>
+
+  <hr>
+  <footer>Daniel Alcatruz · 2026</footer>
+</div>
+</article>
+</main>
+
+<script src="datos/datos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.BK;
+  if (!D) return;
+
+  function num(x, d) { return x.toLocaleString("es-CL", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function pct(x, d) { return num(100 * x, d === undefined ? 0 : d) + "%"; }
+
+  // Tabla 1
+  (function () {
+    var per = Array.from(new Set(D.rice.map(function (r) { return r.periodo; }))).sort();
+    var partidos = ["UDI", "RN", "PREP", "DC", "PPD", "PS", "PC", "FA"];
+    var corto = window.innerWidth < 600;
+    var nombres = corto ? { PREP: "REP" } : { PREP: "Republicanos", FA: "Frente Amplio" };
+    var th = "<tr><th>Partido</th>" + per.map(function (p) {
+      return "<th>" + (corto ? p.slice(2, 4) + "-" + p.slice(7, 9) : p) + "</th>";
+    }).join("") + "</tr>";
+    document.querySelector("#tabla-rice thead").innerHTML = th;
+    document.querySelector("#tabla-rice tbody").innerHTML = partidos.map(function (pa) {
+      return "<tr><td>" + (nombres[pa] || pa) + "</td>" + per.map(function (p) {
+        var f = D.rice.filter(function (r) { return r.periodo === p && r.partido === pa; })[0];
+        return f ? "<td>" + num(f.rice, 2) + "</td>" : '<td class="vacio">·</td>';
+      }).join("") + "</tr>";
+    }).join("");
+  })();
+
+  if (!window.Plotly) return;
+  var CONFIG = { displayModeBar: false, responsive: true, scrollZoom: false };
+  function tok() {
+    var s = getComputedStyle(document.documentElement);
+    var g = function (n) { return s.getPropertyValue(n).trim(); };
+    return { surface: g("--surface"), ink: g("--ink"), ink2: g("--ink-2"), muted: g("--muted"), grid: g("--grid"),
+             axis: g("--axis"), izq: g("--izq"), der: g("--der"), sen: g("--sen"), neutro: g("--neutro") };
+  }
+  function ancho(id) { return document.getElementById(id).clientWidth; }
+  function base(T, extra) {
+    var l = {
+      paper_bgcolor: T.surface, plot_bgcolor: T.surface,
+      font: { family: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', size: 12, color: T.ink2 },
+      separators: ",.", margin: { l: 56, r: 16, t: 40, b: 48 },
+      hoverlabel: { bgcolor: T.surface, bordercolor: T.axis, font: { color: T.ink, size: 13 } },
+      legend: { orientation: "h", x: 0, xanchor: "left", y: 1.02, yanchor: "bottom", font: { color: T.ink2, size: 12 } },
+      dragmode: false
+    };
+    for (var k in extra) l[k] = extra[k];
+    return l;
+  }
+  function eje(T, extra) {
+    var a = { gridcolor: T.grid, linecolor: T.axis, zeroline: false, fixedrange: true,
+              tickfont: { color: T.muted }, title: { font: { color: T.ink2, size: 12 } } };
+    for (var k in extra) { if (k === "title") a.title.text = extra[k]; else a[k] = extra[k]; }
+    return a;
+  }
+  var COLOR = function (T, p) { return p === "Boric" ? T.izq : T.der; };
+
+  // Figura 1 ------------------------------------------------------------------
+  function figPolos(T) {
+    var C = D.camara_1418;
+    var resto = C.filter(function (c) { return !c.bk; });
+    var data = [{
+      type: "scatter", mode: "markers", name: "Resto de la Cámara", showlegend: false,
+      x: resto.map(function (c) { return c.d1; }), y: resto.map(function (c) { return c.d2; }),
+      customdata: resto.map(function (c) { return [c.n, c.pa, num(c.d1, 2), num(c.d2, 2), pct(c.leal)]; }),
+      hovertemplate: "<b>%{customdata[0]}</b> · %{customdata[1]}<br>d1 %{customdata[2]} · d2 %{customdata[3]}<br>Lealtad al bloque %{customdata[4]}<extra></extra>",
+      marker: { size: 8, color: T.neutro, line: { color: T.surface, width: 1 } }
+    }];
+    ["Boric", "Kast"].forEach(function (p) {
+      var c = C.filter(function (x) { return x.bk === p; })[0];
+      data.push({
+        type: "scatter", mode: "markers+text", name: p, showlegend: false,
+        x: [c.d1], y: [c.d2], text: [p], textposition: p === "Boric" ? "middle right" : "middle left",
+        textfont: { color: T.ink, size: 14 },
+        customdata: [[c.n, c.pa, num(c.d1, 2), num(c.d2, 2), pct(c.leal)]],
+        hovertemplate: "<b>%{customdata[0]}</b> · %{customdata[1]}<br>d1 %{customdata[2]} · d2 %{customdata[3]}<br>Lealtad al bloque %{customdata[4]}<extra></extra>",
+        marker: { size: 15, color: COLOR(T, p), line: { color: T.surface, width: 2 } }
+      });
+    });
+    var layout = base(T, {
+      height: ancho("fig-polos") < 560 ? 420 : 460, margin: { l: 52, r: 16, t: 16, b: 52 },
+      xaxis: eje(T, { title: "d1  (izquierda ←   → derecha)" }),
+      yaxis: eje(T, { title: "d2  (dispersión del voto)" })
+    });
+    Plotly.react("fig-polos", data, layout, CONFIG);
+  }
+
+  // Figura 2 ------------------------------------------------------------------
+  function figTrayectorias(T) {
+    var per = ["2002-2006", "2006-2010", "2010-2014", "2014-2018", "2018-2022"];
+    var angosto = ancho("fig-trayectorias") < 600;
+    var d1 = angosto ? { x: [0, 1], y: [0.58, 1] } : { x: [0, 0.45], y: [0, 1] };
+    var d2 = angosto ? { x: [0, 1], y: [0, 0.42] } : { x: [0.55, 1], y: [0, 1] };
+    var data = [];
+    ["Boric", "Kast"].forEach(function (p) {
+      var f = D.tray.filter(function (t) { return t.persona === p; });
+      [["d2_pct", "x", "y", true], ["leal_bloque_pct", "x2", "y2", false]].forEach(function (s) {
+        data.push({
+          type: "scatter", mode: "lines+markers", name: p, showlegend: s[3], legendgroup: p,
+          xaxis: s[1], yaxis: s[2], x: f.map(function (t) { return t.periodo; }), y: f.map(function (t) { return 100 * t[s[0]]; }),
+          line: { color: COLOR(T, p), width: 2 }, marker: { size: 9, color: COLOR(T, p), line: { color: T.surface, width: 2 } },
+          customdata: f.map(function (t) { return [t.partido, num(100 * t.d2_pct, 0), pct(t.leal_bloque, 1), num(100 * t.leal_bloque_pct, 0)]; }),
+          hovertemplate: "<b>" + p + "</b> · %{x} · %{customdata[0]}<br>d2 percentil %{customdata[1]}<br>Lealtad al bloque %{customdata[2]}, percentil %{customdata[3]}<extra></extra>"
+        });
+      });
+    });
+    var ticks = angosto ? per.map(function (p) { return p.slice(2, 4) + "-" + p.slice(7, 9); }) : per;
+    var layout = base(T, {
+      height: angosto ? 640 : 380, margin: { l: 48, r: 12, t: 56, b: 44 },
+      xaxis: eje(T, { domain: d1.x, anchor: "y", categoryorder: "array", categoryarray: per, tickvals: per, ticktext: ticks, tickangle: 0, showgrid: false }),
+      yaxis: eje(T, { domain: d1.y, anchor: "x", range: [-5, 105], dtick: 25 }),
+      xaxis2: eje(T, { domain: d2.x, anchor: "y2", categoryorder: "array", categoryarray: per, tickvals: per, ticktext: ticks, tickangle: 0, showgrid: false }),
+      yaxis2: eje(T, { domain: d2.y, anchor: "x2", range: [-5, 105], dtick: 25 }),
+      annotations: [
+        { text: "<b>Percentil de d2</b>", xref: "paper", yref: "paper", x: d1.x[0], y: d1.y[1], xanchor: "left", yanchor: "bottom", yshift: 6, showarrow: false, font: { color: T.ink, size: 13 } },
+        { text: "<b>Percentil de lealtad al bloque</b>", xref: "paper", yref: "paper", x: d2.x[0], y: d2.y[1], xanchor: "left", yanchor: "bottom", yshift: 6, showarrow: false, font: { color: T.ink, size: 13 } }
+      ],
+      legend: { orientation: "h", x: 1, xanchor: "right", y: 1.0 + (angosto ? 0.045 : 0.09), yanchor: "bottom", font: { color: T.ink2, size: 12 } }
+    });
+    Plotly.react("fig-trayectorias", data, layout, CONFIG);
+  }
+
+  // Figura 3 ------------------------------------------------------------------
+  function figMaterias(T) {
+    var MAT = [["seguridad", "Seguridad"], ["economia", "Economía y trabajo"], ["politico", "Político-institucional"], ["valorico", "Valóricos"], ["otras", "Otras materias"]];
+    var M = D.materia.filter(function (m) { return m.periodo === "2014-2018"; });
+    function fila(p, k) { return M.filter(function (m) { return m.persona === p && m.materia === k; })[0]; }
+    var y = MAT.map(function (m) { return m[1]; });
+    var data = ["Boric", "Kast"].map(function (p) {
+      return {
+        type: "bar", orientation: "h", name: p, y: y, x: MAT.map(function (m) { return 100 * fila(p, m[0]).contra; }),
+        marker: { color: COLOR(T, p) },
+        customdata: MAT.map(function (m) { var f = fila(p, m[0]); return [pct(f.contra, 1), f.votos]; }),
+        hovertemplate: "<b>" + p + "</b> · %{y}<br>Contra su bloque %{customdata[0]} de %{customdata[1]} votos<extra></extra>"
+      };
+    });
+    data.push({
+      type: "bar", orientation: "h", name: "Mediana de la Cámara", y: y,
+      x: MAT.map(function (m) { return 100 * fila("Boric", m[0]).mediana_camara; }),
+      marker: { color: T.neutro },
+      customdata: MAT.map(function (m) { return pct(fila("Boric", m[0]).mediana_camara, 1); }),
+      hovertemplate: "Mediana de la Cámara · %{y}<br>%{customdata}<extra></extra>"
+    });
+    var angosto = ancho("fig-materias") < 560;
+    var layout = base(T, {
+      height: angosto ? 460 : 400, barmode: "group", bargap: 0.3, bargroupgap: 0.08,
+      margin: { l: angosto ? 120 : 160, r: 16, t: 40, b: 44 },
+      xaxis: eje(T, { range: [0, 40], ticksuffix: "%", dtick: 10, title: "Votos contra la mayoría del propio bloque" }),
+      yaxis: eje(T, { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: angosto ? 11 : 13 } })
+    });
+    Plotly.react("fig-materias", data, layout, CONFIG);
+  }
+
+  // Figura 4 ------------------------------------------------------------------
+  function figPolarizacion(T) {
+    var P = D.polar;
+    var ult = P.length - 1;
+    var corto = ancho("fig-polarizacion") < 560;
+    var ticks = P.map(function (p, i) {
+      var t = corto ? p.periodo.slice(2, 4) + "-" + p.periodo.slice(7, 9) : p.periodo;
+      return i === ult ? t + (corto ? "*" : "<br>(parcial)") : t;
+    });
+    var data = [{
+      type: "scatter", mode: "lines+markers", showlegend: false,
+      x: P.map(function (p) { return p.periodo; }), y: P.map(function (p) { return 100 * p.bloque_contra_bloque; }),
+      line: { color: T.ink, width: 2 },
+      marker: { size: 9, color: P.map(function (p, i) { return i === ult ? T.surface : T.ink; }), line: { color: T.ink, width: 2 } },
+      customdata: P.map(function (p) { return [pct(p.bloque_contra_bloque, 1), p.presidente, p.votaciones.toLocaleString("es-CL")]; }),
+      hovertemplate: "%{x} · %{customdata[1]}<br>Bloque contra bloque %{customdata[0]}<br>%{customdata[2]} votaciones<extra></extra>"
+    }];
+    var layout = base(T, {
+      height: 320, margin: { l: 48, r: 16, t: 16, b: 52 },
+      xaxis: eje(T, { tickvals: P.map(function (p) { return p.periodo; }), ticktext: ticks, tickangle: 0, showgrid: false, showline: true }),
+      yaxis: eje(T, { range: [0, 70], ticksuffix: "%", dtick: 20 })
+    });
+    Plotly.react("fig-polarizacion", data, layout, CONFIG);
+  }
+
+  // Figura 5 ------------------------------------------------------------------
+  function figCarreras(T) {
+    var C = D.carreras;
+    var grupos = [["Ninguno", "No llegaron", T.neutro, 7], ["Senado", "Llegaron al Senado", T.sen, 10], ["Presidencia", "Llegaron a la Presidencia", T.ink, 13]];
+    var data = grupos.map(function (g) {
+      var f = C.filter(function (c) { return c.destino === g[0]; });
+      var pres = g[0] === "Presidencia";
+      return {
+        type: "scatter", mode: pres ? "markers+text" : "markers", name: g[1],
+        x: f.map(function (c) { return 100 * c.x; }), y: f.map(function (c) { return 100 * c.y; }),
+        text: pres ? f.map(function (c) { return c.n.indexOf("Boric") >= 0 ? "Boric" : "Kast"; }) : undefined,
+        textposition: "middle left", textfont: { color: T.ink, size: 13 },
+        customdata: f.map(function (c) { return [c.n, c.pa, c.p, num(100 * c.x, 0), num(100 * c.y, 0)]; }),
+        hovertemplate: "<b>%{customdata[0]}</b> · %{customdata[1]}<br>Último período %{customdata[2]}<br>Distancia al centro, percentil %{customdata[3]}<br>d2, percentil %{customdata[4]}<extra></extra>",
+        marker: { size: g[3], color: g[2], opacity: g[0] === "Ninguno" ? 0.8 : 1, line: { color: T.surface, width: 1.5 } }
+      };
+    });
+    var layout = base(T, {
+      height: ancho("fig-carreras") < 560 ? 440 : 460, margin: { l: 52, r: 16, t: 40, b: 52 },
+      xaxis: eje(T, { range: [-3, 103], dtick: 25, title: "Distancia al centro de la sala (percentil)" }),
+      yaxis: eje(T, { range: [-3, 103], dtick: 25, title: "Dispersión del voto, d2 (percentil)" })
+    });
+    Plotly.react("fig-carreras", data, layout, CONFIG);
+  }
+
+  function todo() { var T = tok(); figPolos(T); figTrayectorias(T); figMaterias(T); figPolarizacion(T); figCarreras(T); }
+  todo();
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", todo);
+  }
+  var t;
+  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(todo, 200); });
+})();
+</script>
+</body>
+</html>
