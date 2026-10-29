@@ -13,14 +13,7 @@ El post está en `index.html` y se publica con GitHub Pages.
 | `index.html` | El post, con gráficos interactivos (Plotly) |
 | `R/01_base.R` | Lealtad al bloque y al partido, votaciones de bloque contra bloque, Rice, carreras y votos de Boric y Kast |
 | `R/02_materias.R` | Materia de cada votación por el título del proyecto, validación contra los descriptores de la BCN y votos contra el bloque por materia |
-| `R/03_indicadores.R` | Polarización, Rice, modelo logit de carreras y exportación de `datos/` |
-| `datos/trayectorias_boric_kast.csv` | d1, d2 y lealtad de Boric y Kast por período |
-| `datos/contra_bloque_materia.csv` | Votos contra el propio bloque por materia, con la mediana de la Cámara |
-| `datos/polarizacion.csv` | Votaciones de bloque contra bloque y lealtad mediana por período |
-| `datos/rice_partidos.csv` | Índice de Rice por partido y período |
-| `datos/carreras.csv` | Diputados que dejaron la Cámara entre 2006 y 2026 y su destino posterior |
-| `datos/modelo_carreras.csv` | Coeficientes del modelo logit |
-| `datos/validacion_materias.csv` | Acuerdo de la clasificación por título con los descriptores de la BCN |
+| `R/03_indicadores.R` | Polarización, Rice, modelo logit de carreras y `datos/datos.js` |
 | `datos/datos.js` | Los datos que lee la página |
 
 ## Datos y decisiones
