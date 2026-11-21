@@ -16,6 +16,7 @@ El post está en `index.html` y se publica con GitHub Pages.
 | `R/03_indicadores.R` | Polarización, Rice, modelo logit de carreras y `datos/datos.js` |
 | `R/04_textos.R` | Discursos en Sala de Boric y Kast, palabras que distinguen a uno del otro y a cada uno de su bloque, por período y materia |
 | `R/05_biografia.R` | Biografía parlamentaria: distrito, partido según la Cámara y la BCN, posición B-Call, discursos y actividad en Labor Parlamentaria |
+| `R/06_parte2.R` | Los datos de la parte 2 (`datos/datos2.js`): palabras distintivas, discursos por año, trayectoria y actividad en Labor |
 | `datos/datos.js` | Los datos que lee la página |
 
 ## Datos y decisiones
