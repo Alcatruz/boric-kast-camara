@@ -102,10 +102,18 @@ td.vacio { color: var(--muted); }
 ul.notas { padding-left: 20px; font-size: 16px; line-height: 1.55; color: var(--ink-2); }
 ul.notas li { margin-bottom: 8px; }
 .ref { font-size: 16px; line-height: 1.55; color: var(--ink-2); padding-left: 2em; text-indent: -2em; }
+.ref a { overflow-wrap: anywhere; }
 hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0 0; }
 footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding: 20px 0 0; }
 
+nav.partes { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin: 0 0 28px; font-family: var(--sans); font-size: 14px; }
+nav.partes a { padding: 10px 12px 9px; color: var(--ink-2); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+nav.partes a:hover { color: var(--ink); }
+nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+
 @media (max-width: 600px) {
+  nav.partes { font-size: 13px; }
+  nav.partes a { padding: 9px 8px 8px; }
   body { font-size: 17.5px; }
   header.cabecera { padding-top: 36px; }
   .bajada { font-size: 19px; }
@@ -121,6 +129,10 @@ footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding
 <main>
 
 <header class="cabecera col">
+  <nav class="partes" aria-label="Partes del análisis">
+    <a href="index.html" aria-current="page">Parte 1 · Cómo votaban</a>
+    <a href="parte2.html">Parte 2 · Qué decían</a>
+  </nav>
   <p class="antetitulo">Comportamiento legislativo · Chile</p>
   <h1>Los dos extremos</h1>
   <p class="bajada">Boric y Kast en la Cámara de Diputados, y lo que su paso por ella dice sobre la polarización chilena.</p>
@@ -177,6 +189,7 @@ footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding
 <div class="col">
   <h2>Una sala que se partió</h2>
   <p>Mientras tanto la Cámara cambió. Las votaciones de bloque contra bloque, aquellas en que la mayoría de un bloque vota distinto que la mayoría del otro, pasaron del 28% en 2002-2006 al 53% en 2022-2026, y en lo que va de 2026-2030 llegan al 63% (Figura 4). No es que los partidos se desordenaran. El índice de Rice de los principales partidos se mantiene entre 0,84 y 1 en todo el período (Tabla 1), y la lealtad mediana al bloque se movió poco, entre 90% y 94%. Lo que cambió es cuántas veces los dos bloques chocan.</p>
+  <p>Ojo con el orden. En 2014-2018, cuando Boric y Kast eran los polos de la sala, las votaciones de bloque contra bloque fueron 29%, menos que el 36% del período anterior. El salto viene después, desde 2018-2022. Fueron polos antes de que la sala se partiera, y llegaron al gobierno cuando ya lo estaba.</p>
 </div>
 
 <figure class="ancho">
@@ -204,6 +217,7 @@ footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding
 <div class="col">
   <h2>Lo que dice y lo que no</h2>
   <p>Con dos casos no se puede decir que la conducta en la Cámara anticipó el presente. Pero el cuadro calza. En el mismo lapso en que la sala se partió en dos bloques que chocan cada vez más, las carreras que suben vienen de los polos, y los dos diputados más alejados del centro en 2014-2018 llegaron al gobierno, uno detrás del otro. Los dos que menos votaban con su bloque terminaron conduciéndolo.</p>
+  <p>La <a href="parte2.html">segunda parte</a> mira lo que decían en la Sala y cómo fue su paso por la Cámara.</p>
 
   <h3>Datos, código y decisiones</h3>
   <ul class="notas">

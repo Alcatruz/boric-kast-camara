@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Los dos extremos, parte 2</title>
+<meta name="description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados y cómo fue su paso por ella.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="Los dos extremos, parte 2">
+<meta property="og:description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados y cómo fue su paso por ella.">
+<meta property="og:type" content="article">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --izq: #e34948;
+  --der: #2a78d6;
+  --sen: #eb6834;
+  --neutro: #b5b3ab;
+  --link: #1c5cab;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --border: rgba(255, 255, 255, 0.10);
+    --izq: #e66767;
+    --der: #3987e5;
+    --sen: #d95926;
+    --neutro: #5d5c57;
+    --link: #86b6ef;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --border: rgba(255, 255, 255, 0.10);
+  --izq: #e66767;
+  --der: #3987e5;
+  --sen: #d95926;
+  --neutro: #5d5c57;
+  --link: #86b6ef;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--serif); font-size: 19px; line-height: 1.6; }
+main { padding: 0 16px 64px; }
+.col { max-width: 680px; margin: 0 auto; }
+.ancho { max-width: 920px; margin: 0 auto; }
+
+header.cabecera { padding: 56px 0 8px; }
+.antetitulo { font-family: var(--sans); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+h1 { font-family: var(--sans); font-weight: 700; font-size: clamp(36px, 7vw, 52px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 16px; text-wrap: balance; }
+.bajada { font-size: 21px; line-height: 1.45; color: var(--ink-2); margin: 0 0 20px; text-wrap: pretty; }
+.firma { font-family: var(--sans); font-size: 14px; color: var(--muted); margin: 0; }
+.firma a { color: var(--ink-2); }
+h2 { font-family: var(--sans); font-size: 24px; line-height: 1.25; font-weight: 700; margin: 56px 0 12px; letter-spacing: -0.005em; }
+h3 { font-family: var(--sans); font-size: 17px; font-weight: 700; margin: 32px 0 8px; }
+p { margin: 0 0 18px; text-wrap: pretty; }
+a { color: var(--link); text-underline-offset: 2px; }
+.var { font-family: var(--sans); font-weight: 600; font-size: 0.92em; }
+
+.recuadro { border: 1px solid var(--border); background: var(--surface); border-radius: 10px; padding: 18px 22px; margin: 28px 0; font-size: 17px; line-height: 1.55; }
+.recuadro p:last-child { margin-bottom: 0; }
+
+figure { margin: 32px auto 36px; }
+.grafico { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 8px 4px; overflow: hidden; }
+.lienzo { width: 100%; }
+figcaption { font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--ink-2); margin: 10px 4px 0; max-width: 680px; }
+figcaption b { color: var(--ink); }
+
+.tabla-envoltura { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 14px; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--grid); font-variant-numeric: tabular-nums; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+tr:last-child td { border-bottom: 0; }
+td.vacio { color: var(--muted); }
+
+ul.notas { padding-left: 20px; font-size: 16px; line-height: 1.55; color: var(--ink-2); }
+ul.notas li { margin-bottom: 8px; }
+.ref { font-size: 16px; line-height: 1.55; color: var(--ink-2); padding-left: 2em; text-indent: -2em; }
+.ref a { overflow-wrap: anywhere; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 48px 0 0; }
+footer { font-family: var(--sans); font-size: 13px; color: var(--muted); padding: 20px 0 0; }
+
+@media (max-width: 600px) {
+  body { font-size: 17.5px; }
+  header.cabecera { padding-top: 36px; }
+  .bajada { font-size: 19px; }
+  h2 { font-size: 21px; margin-top: 44px; }
+  .grafico { padding: 8px 2px 2px; border-radius: 8px; }
+  .recuadro { padding: 14px 16px; }
+  table { font-size: 12.5px; }
+  th, td { padding: 7px 6px; }
+}
+
+nav.partes { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin: 0 0 28px; font-family: var(--sans); font-size: 14px; }
+nav.partes a { padding: 10px 12px 9px; color: var(--ink-2); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+nav.partes a:hover { color: var(--ink); }
+nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.selector { display: inline-flex; gap: 0; margin: 0 0 10px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; font-family: var(--sans); }
+.selector button { font: inherit; font-size: 13px; padding: 6px 12px; border: 0; background: var(--surface); color: var(--ink-2); cursor: pointer; }
+.selector button + button { border-left: 1px solid var(--border); }
+.selector button[aria-pressed="true"] { background: var(--ink); color: var(--page); }
+tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
+@media (max-width: 600px) { nav.partes { font-size: 13px; } nav.partes a { padding: 9px 8px 8px; } }
+</style>
+
+</head>
+<body>
+<main>
+
+<header class="cabecera col">
+  <nav class="partes" aria-label="Partes del análisis">
+    <a href="index.html">Parte 1 · Cómo votaban</a>
+    <a href="parte2.html" aria-current="page">Parte 2 · Qué decían</a>
+  </nav>
+  <p class="antetitulo">Comportamiento legislativo · Chile</p>
+  <h1>Los dos extremos</h1>
+  <p class="bajada">Parte 2. Lo que Boric y Kast decían en la Sala y cómo fue su paso por la Cámara.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 21 de noviembre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>En la <a href="index.html">primera parte</a> miré cómo votaban Boric y Kast. Los votos dicen dónde se ubica un diputado, pero no de qué habla ni en qué ocupa su tiempo. Aquí miro lo otro. De dónde venía cada uno, cuánto hablaba en la Sala, qué palabras lo separaban del otro y de los suyos, y qué hacía fuera de la Sala.</p>
+
+  <h2>Dos carreras</h2>
+  <p>Kast estuvo 16 años en la Cámara, cuatro períodos seguidos. Los tres primeros por el distrito 30, que reunía a San Bernardo, Calera de Tango, Buin y Paine, y el último por el 24, La Reina y Peñalolén. Boric estuvo 8 años, los dos períodos por Magallanes. Llegó en 2014 como independiente fuera de pacto y en 2018 volvió dentro del Frente Amplio, en un cupo del Partido Humanista.</p>
+  <p>Kast votó en el extremo derecho de la Cámara en todos sus períodos, entre el percentil 93 y el 100 de <span class="var">d1</span> (Tabla 1). Lo que cambió fue la dispersión. En 2010-2014, con Piñera en La Moneda, su <span class="var">d2</span> bajó al percentil 12 y votó con su bloque el 99% de las veces. Fue su único período como un diputado disciplinado de la derecha, y el único en que la derecha gobernaba. Boric estuvo en el extremo izquierdo en sus dos períodos.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura">
+    <table id="tabla-trayectoria"><thead></thead><tbody></tbody></table>
+  </div>
+  <figcaption><b>Tabla 1.</b> Boric y Kast en cada período en que fueron diputados. El partido es la última militancia que registra la Cámara en el período. Posición (<span class="var">d1</span>) y <span class="var">d2</span> en percentiles de la Cámara de ese período. En <span class="var">d1</span>, 0 es el diputado más a la izquierda y 100 el más a la derecha.</figcaption>
+</figure>
+
+<div class="col">
+  <p>Ni siquiera el partido es un dato simple. La Cámara registra a Kast en la UDI hasta julio de 2017, y la Biblioteca del Congreso lo da como independiente desde marzo de 2014. A Boric la Cámara lo tiene como independiente hasta 2020 y en Convergencia Social después, mientras la Biblioteca lo pone en el Partido Humanista entre 2018 y 2019. Las dos fuentes son oficiales y ninguna advierte que la otra dice algo distinto.</p>
+
+  <h2>Cuánto hablaban</h2>
+  <p>Boric habló mucho más. En sus 8 años tiene 249 discursos en la Sala, sin contar los informes que rindió a nombre de una comisión. Kast tiene 145 en 16 años, y cada vez menos. Fueron 41 en su primer período y 58 en el segundo, pero 21 en el tercero y 25 en el último (Figura 1).</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-volumen" class="lienzo" role="img" aria-label="Discursos en Sala de Boric y Kast por año"></div></div>
+  <figcaption><b>Figura 1.</b> Discursos en la Sala por año, sin los informes de comisión. Boric fue diputado entre 2014 y 2022 y Kast entre 2002 y 2018.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Lo que los distingue</h2>
+  <div class="recuadro">
+    <p><b>Cómo se mide.</b> Para cada palabra y cada par de palabras comparo cuántas veces la usa uno y cuántas el otro, con un log-odds que corrige por lo común que es esa palabra en toda la Cámara del período (Monroe et al., 2008). El largo de cada barra es esa diferencia dividida por su error, así que mide qué tan propia de uno es una palabra, no cuántas veces la dijo. De los discursos saco lo que dice la Mesa antes del turno, los nombres de personas que siguen a un tratamiento, las palabras vacías y las fórmulas de la Sala. Dejo los nombres de partidos, porque a quién se nombra también dice algo.</p>
+  </div>
+  <p>En toda su carrera, lo que más separa a Kast de Boric es la educación (Figura 2). Calidad, jóvenes, padres, alumnos, escuelas, profesores, educación superior. Boric habla de trabajadores, de derechos humanos, de su región y de la derecha.</p>
+  <p>En la Cámara que compartieron, 2014-2018, la distancia se ve en los temas. Boric habla de trabajadores, de mercado, de las AFP, del salario mínimo y del movimiento social. Kast nombra al Partido Comunista y a Bachelet, discute la identidad de género y el aborto, y vuelve sobre la Universidad ARCIS, que según él fundó ese partido.</p>
+</div>
+
+<figure class="ancho">
+  <div class="selector" role="group" aria-label="Período de la comparación">
+    <button type="button" data-cmp="carrera" aria-pressed="true">Toda su carrera</button>
+    <button type="button" data-cmp="p1418" aria-pressed="false">Solo 2014-2018</button>
+  </div>
+  <div class="grafico"><div id="fig-palabras" class="lienzo" role="img" aria-label="Palabras que distinguen a Boric de Kast"></div></div>
+  <figcaption><b>Figura 2.</b> Las 15 palabras o pares de palabras que más distinguen a cada uno frente al otro en la Sala. Al pasar el cursor aparece cuántas veces la usó cada uno. Una palabra suelta no se muestra si la mitad de sus usos está dentro de un par que ya aparece.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Frente a los suyos</h2>
+  <p>La educación no separa a Kast solo de Boric. Frente al resto de la derecha entre 2002 y 2018, las palabras que más lo distinguen también son de educación. Escuelas, apoderados, acreditación, lenguaje, jornada escolar completa. Más abajo aparece la píldora del día después, a la que dedicó 35 menciones (Figura 3).</p>
+  <p>A Boric, frente al resto de la izquierda entre 2014 y 2022, lo distinguen Magallanes, las zonas extremas, el Frente Amplio, los derechos humanos y las universidades estatales. Es decir, su región y su propio grupo, más que un tema del país.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-bloque" class="lienzo" role="img" aria-label="Palabras que distinguen a Kast del resto de la derecha y a Boric del resto de la izquierda"></div></div>
+  <figcaption><b>Figura 3.</b> Las 14 palabras o pares de palabras que más distinguen a Kast del resto de la derecha (2002-2018) y a Boric del resto de la izquierda (2014-2022). El bloque es el de B-Call en cada período.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Fuera de la Sala</h2>
+  <p>La Sala es una parte del trabajo. Labor Parlamentaria, de la Biblioteca del Congreso, registra además las mociones que firma cada diputado, sus peticiones de oficio, los proyectos de acuerdo y de resolución, los permisos y las licencias (Figura 4). Kast firmó 256 mociones en 16 años y Boric 126 en 8, unas 16 por año cada uno. Boric presentó 94 proyectos de resolución y Kast 113 proyectos de acuerdo.</p>
+  <p>La mayor diferencia está en las peticiones de oficio, en que un diputado pide información a un servicio del Estado. Labor las registra desde 2010. Entre 2010 y 2013 Kast pidió 2. En 2014 pidió 172, y en 2017, el año de su primera candidatura presidencial, 496, cerca del 7% de todas las de la Cámara ese año (Figura 5). Boric pidió entre 34 y 112 por año desde 2015.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-labor" class="lienzo" role="img" aria-label="Actividad de Boric y Kast en Labor Parlamentaria por tipo, por año como diputado"></div></div>
+  <figcaption><b>Figura 4.</b> Registros de Labor Parlamentaria por tipo, divididos por los años como diputado (16 de Kast y 8 de Boric). Al pasar el cursor aparece el total.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-oficios" class="lienzo" role="img" aria-label="Peticiones de oficio de Boric y Kast por año"></div></div>
+  <figcaption><b>Figura 5.</b> Peticiones de oficio por año según Labor Parlamentaria, que las registra desde 2010. Al pasar el cursor aparece la proporción de todas las de la Cámara ese año.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Lo que dice y lo que no</h2>
+  <p>Los discursos no muestran a dos diputados que hablaran de lo mismo desde lados opuestos. Muestran agendas distintas. Kast se hizo un lugar en la Sala con la educación y, al final, con el Partido Comunista, el gobierno de Bachelet y la agenda valórica. Boric, con su región, el trabajo y los derechos humanos. La primera parte mostraba que los dos se apartaban de su bloque en los votos. Aquí se ve que también hablaban de otra cosa. Kast se distinguía de la derecha por la educación y la agenda valórica, y Boric de la izquierda por su región y por el Frente Amplio.</p>
+  <p>Son dos casos y los textos son cortos, sobre todo los de Kast al final de su paso por la Cámara. Las palabras distintivas describen, no explican.</p>
+
+  <h3>Datos, código y decisiones</h3>
+  <ul class="notas">
+    <li>Discursos en la Sala de la Cámara de la base de intervenciones de Labor Parlamentaria, del 11 de marzo de 2002 al 10 de marzo de 2022, con el orador revisado. Solo intervenciones, sin peticiones de oficio, homenajes ni indicaciones. Fuera los informes de comisión, que se reconocen porque la Mesa da la palabra al diputado informante o anuncia que alguien rinde el informe.</li>
+    <li>El prior del log-odds es la frecuencia de cada término en toda la Cámara del mismo período, escalada a 10.000 palabras. Solo términos que el par usa al menos 8 veces, en al menos 4 discursos.</li>
+    <li>El distrito sale de las reseñas biográficas de la Biblioteca del Congreso. La militancia, de los datos abiertos de la Cámara y de la Biblioteca, que no coinciden.</li>
+    <li>La actividad en Labor Parlamentaria es la registrada a nombre de cada persona. El bloque y la posición son los de B-Call por período, como en la primera parte.</li>
+    <li>El código está en el <a href="https://github.com/Alcatruz/boric-kast-camara">repositorio</a>.</li>
+  </ul>
+
+  <h3>Referencias</h3>
+  <p class="ref">Monroe, B. L., Colaresi, M. P. y Quinn, K. M. (2008). Fightin' words: Lexical feature selection and evaluation for identifying the content of political conflict. <i>Political Analysis, 16</i>(4), 372-403. <a href="https://doi.org/10.1093/pan/mpn018">https://doi.org/10.1093/pan/mpn018</a></p>
+  <p class="ref">Toro-Maureira, S., Reutter, J., Valenzuela, L., Alcatruz, D. y Valenzuela, M. (2025). B-Call: integrating ideological position and voting cohesion in legislative behavior. <i>Frontiers in Political Science, 7</i>, 1670089. <a href="https://doi.org/10.3389/fpos.2025.1670089">https://doi.org/10.3389/fpos.2025.1670089</a></p>
+
+  <hr>
+  <footer>Daniel Alcatruz · 2026</footer>
+</div>
+</article>
+</main>
+
+<script src="datos/datos2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.BK2;
+  if (!D) return;
+
+  function num(x, d) { return x.toLocaleString("es-CL", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  function pct(x, d) { return num(100 * x, d === undefined ? 0 : d) + "%"; }
+
+  // Tabla 1 -------------------------------------------------------------------
+  (function () {
+    var corto = window.innerWidth < 600;
+    var th = "<tr><th>Período</th><th>Distrito</th><th>Partido</th><th>" + (corto ? "d1" : "Posición (d1)") +
+             "</th><th>d2</th><th>" + (corto ? "Lealtad" : "Lealtad al bloque") + "</th><th>Discursos</th></tr>";
+    var filas = [];
+    ["Kast", "Boric"].forEach(function (q) {
+      filas.push('<tr class="grupo"><td colspan="7">' + q + "</td></tr>");
+      D.periodos.filter(function (p) { return p.q === q; }).forEach(function (p) {
+        filas.push("<tr><td>" + p.periodo + "</td><td>" + p.distrito + "</td><td>" + p.partido + "</td><td>" + num(100 * p.pos, 0) +
+                   "</td><td>" + num(100 * p.d2, 0) + "</td><td>" + pct(p.leal) + "</td><td>" + p.discursos + "</td></tr>");
+      });
+    });
+    document.querySelector("#tabla-trayectoria thead").innerHTML = th;
+    document.querySelector("#tabla-trayectoria tbody").innerHTML = filas.join("");
+  })();
+
+  if (!window.Plotly) return;
+  var CONFIG = { displayModeBar: false, responsive: true, scrollZoom: false };
+  function tok() {
+    var s = getComputedStyle(document.documentElement);
+    var g = function (n) { return s.getPropertyValue(n).trim(); };
+    return { surface: g("--surface"), ink: g("--ink"), ink2: g("--ink-2"), muted: g("--muted"), grid: g("--grid"),
+             axis: g("--axis"), izq: g("--izq"), der: g("--der"), neutro: g("--neutro") };
+  }
+  function ancho(id) { return document.getElementById(id).clientWidth; }
+  function base(T, extra) {
+    var l = {
+      paper_bgcolor: T.surface, plot_bgcolor: T.surface,
+      font: { family: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', size: 12, color: T.ink2 },
+      separators: ",.", margin: { l: 56, r: 16, t: 40, b: 48 },
+      hoverlabel: { bgcolor: T.surface, bordercolor: T.axis, font: { color: T.ink, size: 13 } },
+      legend: { orientation: "h", x: 0, xanchor: "left", y: 1.02, yanchor: "bottom", font: { color: T.ink2, size: 12 } },
+      dragmode: false
+    };
+    for (var k in extra) l[k] = extra[k];
+    return l;
+  }
+  function eje(T, extra) {
+    var a = { gridcolor: T.grid, linecolor: T.axis, zeroline: false, fixedrange: true,
+              tickfont: { color: T.muted }, title: { font: { color: T.ink2, size: 12 } } };
+    for (var k in extra) { if (k === "title") a.title.text = extra[k]; else a[k] = extra[k]; }
+    return a;
+  }
+  var COLOR = function (T, p) { return p === "Boric" ? T.izq : T.der; };
+
+  // Figura 1 ------------------------------------------------------------------
+  function figVolumen(T) {
+    var annos = []; for (var a = 2002; a <= 2022; a++) annos.push(a);
+    var data = ["Kast", "Boric"].map(function (q) {
+      var v = annos.map(function (a) { var f = D.volumen.filter(function (x) { return x.q === q && x.anno === a; })[0]; return f ? f.n : null; });
+      return { type: "bar", name: q, x: annos, y: v, marker: { color: COLOR(T, q) },
+               hovertemplate: "<b>" + q + "</b> · %{x}<br>%{y} discursos<extra></extra>" };
+    });
+    var layout = base(T, {
+      height: 300, barmode: "group", bargap: 0.25, bargroupgap: 0.05, margin: { l: 44, r: 12, t: 40, b: 40 },
+      xaxis: eje(T, { dtick: ancho("fig-volumen") < 560 ? 4 : 2, showgrid: false, showline: true }),
+      yaxis: eje(T, { title: "Discursos" })
+    });
+    Plotly.react("fig-volumen", data, layout, CONFIG);
+  }
+
+  // Figuras 2 y 3: barras de palabras en dos paneles -------------------------------
+  function panelesPalabras(T, id, izquierda, derecha) {
+    // izquierda y derecha: { titulo, filas, color, propio, otro }
+    var angosto = ancho(id) < 600;
+    var n = Math.max(izquierda.filas.length, derecha.filas.length);
+    var dom1 = angosto ? { x: [0, 1], y: [0.54, 1] } : { x: [0, 0.44], y: [0, 1] };
+    var dom2 = angosto ? { x: [0, 1], y: [0, 0.46] } : { x: [0.56, 1], y: [0, 1] };
+    function traza(lado, ex, ey) {
+      var f = lado.filas.slice().sort(function (a, b) { return Math.abs(b.z) - Math.abs(a.z); });
+      return {
+        type: "bar", orientation: "h", showlegend: false, xaxis: ex, yaxis: ey,
+        y: f.map(function (r) { return r.t; }), x: f.map(function (r) { return Math.abs(r.z); }),
+        marker: { color: lado.color },
+        customdata: f.map(function (r) { return [lado.usos(r), lado.otros(r)]; }),
+        hovertemplate: "<b>%{y}</b><br>" + lado.propio + " %{customdata[0]} veces · " + lado.otro + " %{customdata[1]}<extra></extra>"
+      };
+    }
+    var data = [traza(izquierda, "x", "y"), traza(derecha, "x2", "y2")];
+    var alto = angosto ? 2 * (n * 22 + 60) : n * 26 + 90;
+    var tickY = { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: angosto ? 11 : 12.5 }, ticksuffix: "  " };
+    var layout = base(T, {
+      height: alto, bargap: 0.28, margin: { l: angosto ? 132 : 150, r: 16, t: 40, b: 36 },
+      xaxis: eje(T, { domain: dom1.x, anchor: "y", title: "Qué tan propia (z)", rangemode: "tozero" }),
+      yaxis: eje(T, Object.assign({ domain: dom1.y, anchor: "x" }, tickY)),
+      xaxis2: eje(T, { domain: dom2.x, anchor: "y2", title: "Qué tan propia (z)", rangemode: "tozero" }),
+      yaxis2: eje(T, Object.assign({ domain: dom2.y, anchor: "x2" }, tickY)),
+      annotations: [
+        { text: "<b>" + izquierda.titulo + "</b>", xref: "paper", yref: "paper", x: angosto ? 0 : dom1.x[0], y: dom1.y[1], xanchor: "left", yanchor: "bottom", yshift: 8, showarrow: false, font: { color: T.ink, size: 13 } },
+        { text: "<b>" + derecha.titulo + "</b>", xref: "paper", yref: "paper", x: angosto ? 0 : dom2.x[0], y: dom2.y[1], xanchor: "left", yanchor: "bottom", yshift: 8, showarrow: false, font: { color: T.ink, size: 13 } }
+      ]
+    });
+    if (!angosto) { layout.annotations[1].x = dom2.x[0]; layout.annotations[1].xshift = -130; layout.annotations[0].xshift = -140; }
+    Plotly.react(id, data, layout, CONFIG);
+  }
+
+  var CMP = "carrera";
+  function figPalabras(T) {
+    var P = D.palabras.filter(function (r) { return r.c === CMP; });
+    panelesPalabras(T, "fig-palabras",
+      { titulo: "Boric", color: T.izq, filas: P.filter(function (r) { return r.lado === "Boric"; }), propio: "Boric", otro: "Kast",
+        usos: function (r) { return r.a; }, otros: function (r) { return r.b; } },
+      { titulo: "Kast", color: T.der, filas: P.filter(function (r) { return r.lado === "Kast"; }), propio: "Kast", otro: "Boric",
+        usos: function (r) { return r.b; }, otros: function (r) { return r.a; } });
+  }
+  function figBloque(T) {
+    panelesPalabras(T, "fig-bloque",
+      { titulo: "Kast frente al resto de la derecha", color: T.der, filas: D.palabras.filter(function (r) { return r.c === "kast_bloque"; }),
+        propio: "Kast", otro: "resto de la derecha", usos: function (r) { return r.a; }, otros: function (r) { return r.b; } },
+      { titulo: "Boric frente al resto de la izquierda", color: T.izq, filas: D.palabras.filter(function (r) { return r.c === "boric_bloque"; }),
+        propio: "Boric", otro: "resto de la izquierda", usos: function (r) { return r.a; }, otros: function (r) { return r.b; } });
+  }
+
+  // Figura 4 ------------------------------------------------------------------
+  function figLabor(T) {
+    var tipos = ["Peticiones de oficio", "Mociones", "Intervenciones en Sala", "Proyectos de acuerdo", "Proyectos de resolución",
+                 "Intervenciones en comisión", "Permisos", "Licencias médicas"];
+    var data = ["Kast", "Boric"].map(function (q) {
+      var f = tipos.map(function (t) { return D.labor_tipos.filter(function (r) { return r.q === q && r.tipo === t; })[0]; });
+      return { type: "bar", orientation: "h", name: q, y: tipos, x: f.map(function (r) { return r ? r.por_anno : 0; }),
+               marker: { color: COLOR(T, q) },
+               customdata: f.map(function (r) { return [r ? num(r.por_anno, 1) : "0", r ? r.total : 0]; }),
+               hovertemplate: "<b>" + q + "</b> · %{y}<br>%{customdata[0]} por año como diputado, %{customdata[1]} en total<extra></extra>" };
+    });
+    var angosto = ancho("fig-labor") < 560;
+    var layout = base(T, {
+      height: angosto ? 480 : 420, barmode: "group", bargap: 0.3, bargroupgap: 0.08,
+      margin: { l: angosto ? 150 : 180, r: 16, t: 40, b: 44 },
+      xaxis: eje(T, { title: "Registros por año como diputado", rangemode: "tozero" }),
+      yaxis: eje(T, { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: angosto ? 11 : 13 } })
+    });
+    Plotly.react("fig-labor", data, layout, CONFIG);
+  }
+
+  // Figura 5 ------------------------------------------------------------------
+  function figOficios(T) {
+    var annos = []; for (var a = 2010; a <= 2022; a++) annos.push(a);
+    function camara(a) { var f = D.oficios_camara.filter(function (r) { return r.anno === a; })[0]; return f ? f.oficios : null; }
+    var data = ["Kast", "Boric"].map(function (q) {
+      var f = annos.map(function (a) { return D.labor_anno.filter(function (r) { return r.q === q && r.anno === a; })[0]; });
+      return { type: "bar", name: q, x: annos, y: f.map(function (r) { return r ? r.oficios : null; }), marker: { color: COLOR(T, q) },
+               customdata: f.map(function (r, i) { var c = camara(annos[i]); return r && c ? [pct(r.oficios / c, 1), num(c, 0)] : ["", ""]; }),
+               hovertemplate: "<b>" + q + "</b> · %{x}<br>%{y} peticiones de oficio<br>%{customdata[0]} de las %{customdata[1]} de la Cámara<extra></extra>" };
+    });
+    var layout = base(T, {
+      height: 320, barmode: "group", bargap: 0.25, bargroupgap: 0.05, margin: { l: 48, r: 12, t: 40, b: 40 },
+      xaxis: eje(T, { dtick: ancho("fig-oficios") < 560 ? 2 : 1, showgrid: false, showline: true }),
+      yaxis: eje(T, { title: "Peticiones de oficio" })
+    });
+    Plotly.react("fig-oficios", data, layout, CONFIG);
+  }
+
+  // Selector de la Figura 2
+  var botones = document.querySelectorAll(".selector button");
+  botones.forEach(function (b) {
+    b.addEventListener("click", function () {
+      CMP = b.getAttribute("data-cmp");
+      botones.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      figPalabras(tok());
+    });
+  });
+
+  function todo() { var T = tok(); figVolumen(T); figPalabras(T); figBloque(T); figLabor(T); figOficios(T); }
+  todo();
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", todo);
+  }
+  var t;
+  window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(todo, 200); });
+})();
+</script>
+</body>
+</html>
