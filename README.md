@@ -14,6 +14,8 @@ El post está en `index.html` y se publica con GitHub Pages.
 | `R/01_base.R` | Lealtad al bloque y al partido, votaciones de bloque contra bloque, Rice, carreras y votos de Boric y Kast |
 | `R/02_materias.R` | Materia de cada votación por el título del proyecto, validación contra los descriptores de la BCN y votos contra el bloque por materia |
 | `R/03_indicadores.R` | Polarización, Rice, modelo logit de carreras y `datos/datos.js` |
+| `R/04_textos.R` | Discursos en Sala de Boric y Kast, palabras que distinguen a uno del otro y a cada uno de su bloque, por período y materia |
+| `R/05_biografia.R` | Biografía parlamentaria: distrito, partido según la Cámara y la BCN, posición B-Call, discursos y actividad en Labor Parlamentaria |
 | `datos/datos.js` | Los datos que lee la página |
 
 ## Datos y decisiones
