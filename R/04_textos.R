@@ -94,13 +94,7 @@ TRATOS <- "(diputad[oa]s?|señor(a|ita)?|(ex)?ministr[oa]|colega|senador(a)?|pre
 b$limpio <- str_replace_all(b$limpio, paste0("(?<=\\b", TRATOS, ")\\s+(\\p{Lu}[\\p{L}'-]+)(\\s+(de |del )?\\p{Lu}[\\p{L}'-]+){0,3}"), "")
 b$palabras <- str_count(b$limpio, "\\S+")
 
-SALA <- c("señor", "señora", "señores", "señorita", "presidente", "presidenta", "diputado", "diputada", "diputados",
-          "diputadas", "honorable", "honorables", "colega", "colegas", "sala", "proyecto", "proyectos", "ley", "leyes",
-          "artículo", "artículos", "inciso", "número", "boletín", "cámara", "corporación", "sesión", "palabra",
-          "intervención", "indicación", "indicaciones", "votación", "votar", "voto", "votos", "comisión", "comisiones",
-          "gracias", "muchas", "presidencia", "mesa", "minutos", "tiempo", "intermedio", "su", "don", "doña",
-          "particular", "general", "señoría", "señorías")
-vacias <- unique(c(stopwords::stopwords("es", source = "stopwords-iso"), SALA))
+source("post_boric_kast/R/00_vacias.R")   # SALA y vacias
 
 tokens <- function(d) {
   uni <- d |> select(id, quien, periodo, bloque, limpio) |>

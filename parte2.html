@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Los dos extremos, parte 2</title>
-<meta name="description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados y cómo fue su paso por ella.">
+<meta name="description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados, con quién firmaban y cómo fue su paso por ella.">
 <meta name="author" content="Daniel Alcatruz">
 <meta property="og:title" content="Los dos extremos, parte 2">
-<meta property="og:description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados y cómo fue su paso por ella.">
+<meta property="og:description" content="Lo que Boric y Kast decían en la Sala de la Cámara de Diputados, con quién firmaban y cómo fue su paso por ella.">
 <meta property="og:type" content="article">
 <style>
 :root {
@@ -127,8 +127,26 @@ nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(
 .selector button[aria-pressed="true"] { background: var(--ink); color: var(--page); }
 tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
 @media (max-width: 600px) { nav.partes { font-size: 13px; } nav.partes a { padding: 9px 8px 8px; } }
-</style>
 
+.nubes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.nube { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 8px 6px; }
+.nube img { width: 100%; height: auto; display: block; }
+.nube-titulo { font-family: var(--sans); font-weight: 700; font-size: 14px; margin: 0 0 2px 4px; }
+.kwic { font-family: var(--sans); font-size: 14.5px; line-height: 1.5; margin: 8px 0 24px; }
+.kwic-bloque { margin: 0 0 14px; }
+.kwic-quien { font-weight: 700; margin: 0 0 4px; }
+.kwic ul { list-style: none; padding: 0; margin: 0; }
+.kwic li { padding: 6px 10px; border-left: 3px solid var(--border); margin: 0 0 6px; color: var(--ink-2); background: var(--surface); }
+.kwic li b { color: var(--ink); }
+.c-izq { color: var(--izq); } .c-der { color: var(--der); }
+.tfidf { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.tfidf-celda { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-family: var(--sans); font-size: 14px; }
+.tfidf-cab { font-weight: 700; margin: 0 0 6px; }
+.tfidf ol { margin: 0; padding-left: 20px; color: var(--ink); }
+.tenue { color: var(--muted); font-size: 0.9em; }
+td.izq, th.izq { text-align: left; white-space: normal; }
+@media (max-width: 600px) { .nubes { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 <main>
@@ -140,13 +158,13 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
   </nav>
   <p class="antetitulo">Comportamiento legislativo · Chile</p>
   <h1>Los dos extremos</h1>
-  <p class="bajada">Parte 2. Lo que Boric y Kast decían en la Sala y cómo fue su paso por la Cámara.</p>
+  <p class="bajada">Parte 2. Lo que Boric y Kast decían en la Sala, con quién firmaban y cómo fue su paso por la Cámara.</p>
   <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 21 de noviembre de 2026</p>
 </header>
 
 <article>
 <div class="col">
-  <p>En la <a href="index.html">primera parte</a> miré cómo votaban Boric y Kast. Los votos dicen dónde se ubica un diputado, pero no de qué habla ni en qué ocupa su tiempo. Aquí miro lo otro. De dónde venía cada uno, cuánto hablaba en la Sala, qué palabras lo separaban del otro y de los suyos, y qué hacía fuera de la Sala.</p>
+  <p>En la <a href="index.html">primera parte</a> miré cómo votaban Boric y Kast. Los votos dicen dónde se ubica un diputado, pero no de qué habla ni con quién trabaja. Aquí miro lo otro. De dónde venía cada uno, cuánto hablaba en la Sala, qué palabras lo separaban del otro y de los suyos, con quién firmaba sus proyectos y qué hacía fuera de la Sala.</p>
 
   <h2>Dos carreras</h2>
   <p>Kast estuvo 16 años en la Cámara, cuatro períodos seguidos. Los tres primeros por el distrito 30, que reunía a San Bernardo, Calera de Tango, Buin y Paine, y el último por el 24, La Reina y Peñalolén. Boric estuvo 8 años, los dos períodos por Magallanes. Llegó en 2014 como independiente fuera de pacto y en 2018 volvió dentro del Frente Amplio, en un cupo del Partido Humanista.</p>
@@ -175,63 +193,119 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
 <div class="col">
   <h2>Lo que los distingue</h2>
   <div class="recuadro">
-    <p><b>Cómo se mide.</b> Para cada palabra y cada par de palabras comparo cuántas veces la usa uno y cuántas el otro, con un log-odds que corrige por lo común que es esa palabra en toda la Cámara del período (Monroe et al., 2008). El largo de cada barra es esa diferencia dividida por su error, así que mide qué tan propia de uno es una palabra, no cuántas veces la dijo. De los discursos saco lo que dice la Mesa antes del turno, los nombres de personas que siguen a un tratamiento, las palabras vacías y las fórmulas de la Sala. Dejo los nombres de partidos, porque a quién se nombra también dice algo.</p>
+    <p><b>Cómo se mide.</b> Para saber qué palabras son propias de cada uno uso tres medidas de keyness, que comparan cuántas veces usa una palabra uno y cuántas el otro. La razón de verosimilitud G² y el chi² con corrección de Yates son las dos que trae el paquete quanteda para esto (Benoit et al., 2018). La tercera es un log-odds que corrige por lo común que es cada palabra en toda la Cámara del período (Monroe et al., 2008). Si una palabra sale arriba con las tres, no depende de cómo se mida.</p>
+    <p>De los discursos saco lo que dice la Mesa antes del turno, los nombres de personas que siguen a un tratamiento, las palabras vacías, las palabras de número y las fórmulas de la Sala. Las expresiones de dos palabras que casi siempre van juntas, como derechos humanos o educación superior, cuentan como una, y lo mismo los nombres de partidos y coaliciones.</p>
   </div>
-  <p>En toda su carrera, lo que más separa a Kast de Boric es la educación (Figura 2). Calidad, jóvenes, padres, alumnos, escuelas, profesores, educación superior. Boric habla de trabajadores, de derechos humanos, de su región y de la derecha.</p>
-  <p>En la Cámara que compartieron, 2014-2018, la distancia se ve en los temas. Boric habla de trabajadores, de mercado, de las AFP, del salario mínimo y del movimiento social. Kast nombra al Partido Comunista y a Bachelet, discute la identidad de género y el aborto, y vuelve sobre la Universidad ARCIS, que según él fundó ese partido.</p>
+  <p>En toda su carrera, lo que más separa a Kast de Boric es la educación (Figuras 2 y 3). Educación, jóvenes, calidad, alumnos, escuelas, padres, subvención, acreditación. Boric habla de trabajadores, de Magallanes, de derechos humanos, de su región, de la derecha y del Frente Amplio.</p>
+  <p>Las tres medidas coinciden. En toda su carrera, 15 de las 20 palabras más propias de Boric y 16 de las de Kast están entre las 20 primeras con las tres, y el orden según G² y según el log-odds tiene una correlación de 0,97 y 0,99. En 2014-2018 coinciden menos del lado de Boric, 7 de 20, porque Kast habló poco ese período y las medidas tratan distinto a las palabras que él casi no usó.</p>
 </div>
+
+<figure class="ancho">
+  <div class="nubes">
+    <div class="nube"><p class="nube-titulo">Boric</p><img src="img/nube_boric.png" alt="Nube de las palabras más propias de Boric frente a Kast, con trabajadores, Magallanes, derechos humanos y región entre las más grandes" loading="lazy"></div>
+    <div class="nube"><p class="nube-titulo">Kast</p><img src="img/nube_kast.png" alt="Nube de las palabras más propias de Kast frente a Boric, con educación, jóvenes, calidad y alumnos entre las más grandes" loading="lazy"></div>
+  </div>
+  <figcaption><b>Figura 2.</b> Hasta 50 de las palabras más propias de cada uno frente al otro en toda su carrera; las que no caben en el dibujo quedan fuera. El tamaño crece con la raíz de G². La posición no significa nada; para comparar tamaños, la Figura 3.</figcaption>
+</figure>
 
 <figure class="ancho">
   <div class="selector" role="group" aria-label="Período de la comparación">
     <button type="button" data-cmp="carrera" aria-pressed="true">Toda su carrera</button>
     <button type="button" data-cmp="p1418" aria-pressed="false">Solo 2014-2018</button>
   </div>
-  <div class="grafico"><div id="fig-palabras" class="lienzo" role="img" aria-label="Palabras que distinguen a Boric de Kast"></div></div>
-  <figcaption><b>Figura 2.</b> Las 15 palabras o pares de palabras que más distinguen a cada uno frente al otro en la Sala. Al pasar el cursor aparece cuántas veces la usó cada uno. Una palabra suelta no se muestra si la mitad de sus usos está dentro de un par que ya aparece.</figcaption>
+  <div class="grafico"><div id="fig-palabras" class="lienzo" role="img" aria-label="Palabras que distinguen a Boric de Kast según G²"></div></div>
+  <figcaption><b>Figura 3.</b> Las 15 palabras más propias de cada uno frente al otro, según G². Las marcadas con un punto también están entre las 20 primeras con chi² y con log-odds. Al pasar el cursor aparece cuántas veces la usó cada uno.</figcaption>
+</figure>
+
+<div class="col">
+  <p>En la Cámara que compartieron, 2014-2018, la distancia se ve en los temas. Boric habla de trabajadores, de lo público, de la empresa y del mercado. Kast nombra al Partido Comunista, discute la identidad de género y el aborto, y habla de colegios, profesores y apoderados.</p>
+
+  <h3>En su contexto</h3>
+  <p>Una palabra suelta puede engañar. Estas son frases tomadas al azar de los discursos de cada uno con algunas de sus palabras más propias.</p>
+  <div id="kwic" class="kwic"></div>
+
+  <h2>Qué decía cada uno en cada momento</h2>
+  <p>La keyness compara a uno con el otro. Para ver qué fue propio de cada período uso TF-IDF, que premia las palabras que un diputado usa mucho y el resto de la Cámara de ese período usa poco (Tabla 2). Kast pasa de la educación superior y la acreditación en 2002-2006 a la píldora del día después, los niños autistas y la subvención en 2006-2010. En 2010-2014 aparecen la ley del tabaco, con el techo retráctil y la pared que definen un espacio cerrado, la venta de alcohol en los minimarket y la extradición de Galvarino Apablaza. En 2014-2018, el sexo registral, la Universidad ARCIS y el Partido Comunista. Boric empieza con Magallanes, el Frente Amplio y su crítica al Estado subsidiario, y termina con Magallanes, Puerto Williams y las zonas extremas.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tfidf" id="tfidf"></div>
+  <figcaption><b>Tabla 2.</b> Las 6 palabras con más TF-IDF de cada uno en cada período. Cada documento son todos los discursos de un diputado en el período, frente a los de los demás diputados del mismo período. Algunas son nombres de personas que se mencionan sin tratamiento.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Cómo se conectan sus palabras</h2>
+  <p>Una red de coocurrencias muestra qué palabras aparecen juntas, a menos de cinco palabras de distancia. Con las 35 palabras que más usó cada uno, aparece algo que la keyness esconde. Los dos hablaban de educación. En la red de Kast casi todo pasa por ella, unida a la calidad, los niños y el ministerio. En la de Boric los vínculos se reparten. La educación pesa casi lo mismo que Magallanes y la región, y se une a lo público (Figura 4).</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-redes" class="lienzo" role="img" aria-label="Redes de coocurrencia de las palabras más usadas por Boric y por Kast"></div></div>
+  <figcaption><b>Figura 4.</b> Coocurrencias entre las 35 palabras más usadas por cada uno en la Sala, en una ventana de cinco palabras. Se muestran los 70 vínculos más frecuentes, sin las palabras que quedan sin vínculo, con el nombre de las 22 más usadas; las demás aparecen al pasar el cursor. En color, las palabras que además son propias de cada uno frente al otro (G² mayor que 10,83).</figcaption>
 </figure>
 
 <div class="col">
   <h2>Frente a los suyos</h2>
-  <p>La educación no separa a Kast solo de Boric. Frente al resto de la derecha entre 2002 y 2018, las palabras que más lo distinguen también son de educación. Escuelas, apoderados, acreditación, lenguaje, jornada escolar completa. Más abajo aparece la píldora del día después, a la que dedicó 35 menciones (Figura 3).</p>
-  <p>A Boric, frente al resto de la izquierda entre 2014 y 2022, lo distinguen Magallanes, las zonas extremas, el Frente Amplio, los derechos humanos y las universidades estatales. Es decir, su región y su propio grupo, más que un tema del país.</p>
+  <p>La educación no separa a Kast solo de Boric. Frente al resto de la derecha entre 2002 y 2018, las palabras más propias de él también son de educación. Escuelas, niños, apoderados, educación superior, acreditación, universidades, lenguaje (Figura 5).</p>
+  <p>A Boric, frente al resto de la izquierda entre 2014 y 2022, lo distinguen Magallanes, las zonas extremas, Punta Arenas, el Frente Amplio y la Nueva Mayoría, los derechos humanos y las universidades estatales. Es decir, su región y su propio grupo, más que un tema del país.</p>
 </div>
 
 <figure class="ancho">
   <div class="grafico"><div id="fig-bloque" class="lienzo" role="img" aria-label="Palabras que distinguen a Kast del resto de la derecha y a Boric del resto de la izquierda"></div></div>
-  <figcaption><b>Figura 3.</b> Las 14 palabras o pares de palabras que más distinguen a Kast del resto de la derecha (2002-2018) y a Boric del resto de la izquierda (2014-2022). El bloque es el de B-Call en cada período.</figcaption>
+  <figcaption><b>Figura 5.</b> Las 15 palabras más propias de Kast frente al resto de la derecha (2002-2018) y de Boric frente al resto de la izquierda (2014-2022), según G². El bloque es el de B-Call en cada período.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Con quién firmaban</h2>
+  <p>Las mociones, los proyectos que presentan los propios diputados, llevan hasta 10 firmas. Con quién firma un diputado dice algo de con quién trabaja. Aquí los dos se separan de otra forma.</p>
+  <p>Kast firmó siempre con la UDI, y cada vez más cerrado. Las mociones que firmó con al menos un diputado del otro bloque bajaron del 29% en 2002-2006 al 10% en 2014-2018, cuando la mediana de la Cámara era 44% (Figura 6). En sus dos últimos períodos quedó en el 3% menos transversal de la sala. En 2014-2018 tuvo 49 cofirmantes distintos, contra una mediana de 96,5, y los cuatro con que más firmó eran de la UDI (Tabla 3).</p>
+  <p>Boric, que en 2014-2018 era el que menos votaba con su bloque, firmaba con todo el arco de la izquierda, del Frente Amplio y el Partido Comunista al PPD y la Democracia Cristiana. El 39% y el 36% de sus mociones tuvieron firmas del otro bloque, algo bajo la mediana pero lejos de los extremos.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-copatrocinio" class="lienzo" role="img" aria-label="Porcentaje de mociones con al menos un cofirmante del otro bloque, Boric, Kast y la mediana de la Cámara, por período"></div></div>
+  <figcaption><b>Figura 6.</b> Porcentaje de las mociones de cada uno con al menos un cofirmante del otro bloque B-Call, por período, junto a la mediana de los diputados con 5 mociones o más. Al pasar el cursor aparecen el percentil y los cofirmantes distintos.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="tabla-envoltura">
+    <table id="tabla-socios"><thead></thead><tbody></tbody></table>
+  </div>
+  <figcaption><b>Tabla 3.</b> Los cuatro diputados con que cada uno firmó más mociones en cada período, con el número de mociones juntos.</figcaption>
 </figure>
 
 <div class="col">
   <h2>Fuera de la Sala</h2>
-  <p>La Sala es una parte del trabajo. Labor Parlamentaria, de la Biblioteca del Congreso, registra además las mociones que firma cada diputado, sus peticiones de oficio, los proyectos de acuerdo y de resolución, los permisos y las licencias (Figura 4). Kast firmó 256 mociones en 16 años y Boric 126 en 8, unas 16 por año cada uno. Boric presentó 94 proyectos de resolución y Kast 113 proyectos de acuerdo.</p>
-  <p>La mayor diferencia está en las peticiones de oficio, en que un diputado pide información a un servicio del Estado. Labor las registra desde 2010. Entre 2010 y 2013 Kast pidió 2. En 2014 pidió 172, y en 2017, el año de su primera candidatura presidencial, 496, cerca del 7% de todas las de la Cámara ese año (Figura 5). Boric pidió entre 34 y 112 por año desde 2015.</p>
+  <p>La Sala es una parte del trabajo. Labor Parlamentaria, de la Biblioteca del Congreso, registra además las mociones, las peticiones de oficio, los proyectos de acuerdo y de resolución, los permisos y las licencias (Figura 7). Kast firmó 256 mociones en 16 años y Boric 126 en 8, unas 16 por año cada uno. Boric presentó 94 proyectos de resolución y Kast 113 proyectos de acuerdo.</p>
+  <p>La mayor diferencia está en las peticiones de oficio, en que un diputado pide información a un servicio del Estado. Labor las registra desde 2010. Entre 2010 y 2013 Kast pidió 2. En 2014 pidió 172, y en 2017, el año de su primera candidatura presidencial, 496, cerca del 7% de todas las de la Cámara ese año (Figura 8). Boric pidió entre 34 y 112 por año desde 2015.</p>
 </div>
 
 <figure class="ancho">
   <div class="grafico"><div id="fig-labor" class="lienzo" role="img" aria-label="Actividad de Boric y Kast en Labor Parlamentaria por tipo, por año como diputado"></div></div>
-  <figcaption><b>Figura 4.</b> Registros de Labor Parlamentaria por tipo, divididos por los años como diputado (16 de Kast y 8 de Boric). Al pasar el cursor aparece el total.</figcaption>
+  <figcaption><b>Figura 7.</b> Registros de Labor Parlamentaria por tipo, divididos por los años como diputado (16 de Kast y 8 de Boric). Al pasar el cursor aparece el total.</figcaption>
 </figure>
 
 <figure class="ancho">
   <div class="grafico"><div id="fig-oficios" class="lienzo" role="img" aria-label="Peticiones de oficio de Boric y Kast por año"></div></div>
-  <figcaption><b>Figura 5.</b> Peticiones de oficio por año según Labor Parlamentaria, que las registra desde 2010. Al pasar el cursor aparece la proporción de todas las de la Cámara ese año.</figcaption>
+  <figcaption><b>Figura 8.</b> Peticiones de oficio por año según Labor Parlamentaria, que las registra desde 2010. Al pasar el cursor aparece la proporción de todas las de la Cámara ese año.</figcaption>
 </figure>
 
 <div class="col">
   <h2>Lo que dice y lo que no</h2>
-  <p>Los discursos no muestran a dos diputados que hablaran de lo mismo desde lados opuestos. Muestran agendas distintas. Kast se hizo un lugar en la Sala con la educación y, al final, con el Partido Comunista, el gobierno de Bachelet y la agenda valórica. Boric, con su región, el trabajo y los derechos humanos. La primera parte mostraba que los dos se apartaban de su bloque en los votos. Aquí se ve que también hablaban de otra cosa. Kast se distinguía de la derecha por la educación y la agenda valórica, y Boric de la izquierda por su región y por el Frente Amplio.</p>
-  <p>Son dos casos y los textos son cortos, sobre todo los de Kast al final de su paso por la Cámara. Las palabras distintivas describen, no explican.</p>
+  <p>Los discursos no muestran a dos diputados que hablaran de lo mismo desde lados opuestos. Muestran agendas distintas. Kast se hizo un lugar en la Sala con la educación y, al final, con el Partido Comunista, el gobierno de Bachelet y la agenda valórica. Boric, con su región, el trabajo y los derechos humanos. Y trabajaban distinto. Kast firmaba cada vez más solo con los suyos, mientras Boric, el que menos votaba con su bloque, firmaba con toda la izquierda.</p>
+  <p>Son dos casos y los textos son cortos, sobre todo los de Kast al final de su paso por la Cámara. Las medidas describen, no explican.</p>
 
   <h3>Datos, código y decisiones</h3>
   <ul class="notas">
     <li>Discursos en la Sala de la Cámara de la base de intervenciones de Labor Parlamentaria, del 11 de marzo de 2002 al 10 de marzo de 2022, con el orador revisado. Solo intervenciones, sin peticiones de oficio, homenajes ni indicaciones. Fuera los informes de comisión, que se reconocen porque la Mesa da la palabra al diputado informante o anuncia que alguien rinde el informe.</li>
-    <li>El prior del log-odds es la frecuencia de cada término en toda la Cámara del mismo período, escalada a 10.000 palabras. Solo términos que el par usa al menos 8 veces, en al menos 4 discursos.</li>
-    <li>El distrito sale de las reseñas biográficas de la Biblioteca del Congreso. La militancia, de los datos abiertos de la Cámara y de la Biblioteca, que no coinciden.</li>
-    <li>La actividad en Labor Parlamentaria es la registrada a nombre de cada persona. El bloque y la posición son los de B-Call por período, como en la primera parte.</li>
+    <li>Las tres medidas de keyness se calculan con sus fórmulas, sobre una matriz de documentos y términos de quanteda. Solo términos que el par usa al menos 8 veces, en al menos 4 discursos. El prior del log-odds es la frecuencia de cada término en toda la Cámara del período, escalada a 10.000 palabras.</li>
+    <li>Una expresión de dos palabras cuenta como una si aparece al menos 30 veces en la Cámara 2002-2022 y si la menos frecuente de sus dos palabras aparece en ella al menos el 40% de las veces.</li>
+    <li>El copatrocinio sale de las autorías de las mociones de origen en la Cámara, por fecha de ingreso. Se usan los diputados con id de la Cámara, porque la tabla de autores trae firmantes duplicados sin id al cruzar sus dos fuentes. El bloque de cada cofirmante es su bloque B-Call en el período.</li>
+    <li>El distrito sale de las reseñas biográficas de la Biblioteca del Congreso. La militancia, de los datos abiertos de la Cámara y de la Biblioteca, que no coinciden. La actividad en Labor Parlamentaria es la registrada a nombre de cada persona.</li>
     <li>El código está en el <a href="https://github.com/Alcatruz/boric-kast-camara">repositorio</a>.</li>
   </ul>
 
   <h3>Referencias</h3>
+  <p class="ref">Benoit, K., Watanabe, K., Wang, H., Nulty, P., Obeng, A., Müller, S. y Matsuo, A. (2018). quanteda: An R package for the quantitative analysis of textual data. <i>Journal of Open Source Software, 3</i>(30), 774. <a href="https://doi.org/10.21105/joss.00774">https://doi.org/10.21105/joss.00774</a></p>
   <p class="ref">Monroe, B. L., Colaresi, M. P. y Quinn, K. M. (2008). Fightin' words: Lexical feature selection and evaluation for identifying the content of political conflict. <i>Political Analysis, 16</i>(4), 372-403. <a href="https://doi.org/10.1093/pan/mpn018">https://doi.org/10.1093/pan/mpn018</a></p>
   <p class="ref">Toro-Maureira, S., Reutter, J., Valenzuela, L., Alcatruz, D. y Valenzuela, M. (2025). B-Call: integrating ideological position and voting cohesion in legislative behavior. <i>Frontiers in Political Science, 7</i>, 1670089. <a href="https://doi.org/10.3389/fpos.2025.1670089">https://doi.org/10.3389/fpos.2025.1670089</a></p>
 
@@ -251,6 +325,7 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
 
   function num(x, d) { return x.toLocaleString("es-CL", { minimumFractionDigits: d, maximumFractionDigits: d }); }
   function pct(x, d) { return num(100 * x, d === undefined ? 0 : d) + "%"; }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
   // Tabla 1 -------------------------------------------------------------------
   (function () {
@@ -267,6 +342,51 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     });
     document.querySelector("#tabla-trayectoria thead").innerHTML = th;
     document.querySelector("#tabla-trayectoria tbody").innerHTML = filas.join("");
+  })();
+
+  // Tabla 3, socios -------------------------------------------------------------
+  (function () {
+    document.querySelector("#tabla-socios thead").innerHTML = '<tr><th>Período</th><th class="izq">Con quién firmó más</th></tr>';
+    var filas = [];
+    ["Kast", "Boric"].forEach(function (q) {
+      filas.push('<tr class="grupo"><td colspan="2">' + q + "</td></tr>");
+      var per = Array.from(new Set(D.socios.filter(function (s) { return s.q === q; }).map(function (s) { return s.periodo; }))).sort();
+      per.forEach(function (p) {
+        var s = D.socios.filter(function (x) { return x.q === q && x.periodo === p; });
+        filas.push("<tr><td>" + p + '</td><td class="izq">' + s.map(function (x) {
+          return esc(x.nombre) + " <span class=\"tenue\">" + esc(x.partido) + " · " + x.n + "</span>";
+        }).join(", ") + "</td></tr>");
+      });
+    });
+    document.querySelector("#tabla-socios tbody").innerHTML = filas.join("");
+  })();
+
+  // Concordancias ----------------------------------------------------------------
+  (function () {
+    var html = [];
+    ["Kast", "Boric"].forEach(function (q) {
+      var k = D.kwic.filter(function (r) { return r.q === q; });
+      html.push('<div class="kwic-bloque"><p class="kwic-quien ' + (q === "Boric" ? "c-izq" : "c-der") + '">' + q + "</p><ul>");
+      k.forEach(function (r) {
+        html.push("<li>…" + esc(r.antes) + " <b>" + esc(r.t) + "</b>" + (/^[.,;:!?)]/.test(r.despues) ? "" : " ") + esc(r.despues) + "…</li>");
+      });
+      html.push("</ul></div>");
+    });
+    document.getElementById("kwic").innerHTML = html.join("");
+  })();
+
+  // Tabla 2, TF-IDF ----------------------------------------------------------------
+  (function () {
+    var html = [];
+    ["Kast", "Boric"].forEach(function (q) {
+      var per = Array.from(new Set(D.tfidf.filter(function (r) { return r.q === q; }).map(function (r) { return r.periodo; }))).sort();
+      per.forEach(function (p) {
+        var t = D.tfidf.filter(function (r) { return r.q === q && r.periodo === p; });
+        html.push('<div class="tfidf-celda"><p class="tfidf-cab ' + (q === "Boric" ? "c-izq" : "c-der") + '">' + q + " · " + p + "</p><ol>" +
+                  t.map(function (r) { return "<li>" + esc(r.t) + ' <span class="tenue">' + r.n + "</span></li>"; }).join("") + "</ol></div>");
+      });
+    });
+    document.getElementById("tfidf").innerHTML = html.join("");
   })();
 
   if (!window.Plotly) return;
@@ -297,6 +417,10 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     return a;
   }
   var COLOR = function (T, p) { return p === "Boric" ? T.izq : T.der; };
+  function dos(angosto) {
+    return angosto ? [{ x: [0, 1], y: [0.54, 1] }, { x: [0, 1], y: [0, 0.46] }]
+                   : [{ x: [0, 0.44], y: [0, 1] }, { x: [0.56, 1], y: [0, 1] }];
+  }
 
   // Figura 1 ------------------------------------------------------------------
   function figVolumen(T) {
@@ -314,59 +438,131 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     Plotly.react("fig-volumen", data, layout, CONFIG);
   }
 
-  // Figuras 2 y 3: barras de palabras en dos paneles -------------------------------
-  function panelesPalabras(T, id, izquierda, derecha) {
-    // izquierda y derecha: { titulo, filas, color, propio, otro }
+  // Barras de G² en dos paneles (Figuras 3 y 5) -------------------------------------
+  function panelesG2(T, id, paneles) {
     var angosto = ancho(id) < 600;
-    var n = Math.max(izquierda.filas.length, derecha.filas.length);
-    var dom1 = angosto ? { x: [0, 1], y: [0.54, 1] } : { x: [0, 0.44], y: [0, 1] };
-    var dom2 = angosto ? { x: [0, 1], y: [0, 0.46] } : { x: [0.56, 1], y: [0, 1] };
-    function traza(lado, ex, ey) {
-      var f = lado.filas.slice().sort(function (a, b) { return Math.abs(b.z) - Math.abs(a.z); });
+    var dom = dos(angosto);
+    var n = Math.max(paneles[0].filas.length, paneles[1].filas.length);
+    var data = paneles.map(function (pn, i) {
+      var f = pn.filas.slice().sort(function (a, b) { return b.g2 - a.g2; });
       return {
-        type: "bar", orientation: "h", showlegend: false, xaxis: ex, yaxis: ey,
-        y: f.map(function (r) { return r.t; }), x: f.map(function (r) { return Math.abs(r.z); }),
-        marker: { color: lado.color },
-        customdata: f.map(function (r) { return [lado.usos(r), lado.otros(r)]; }),
-        hovertemplate: "<b>%{y}</b><br>" + lado.propio + " %{customdata[0]} veces · " + lado.otro + " %{customdata[1]}<extra></extra>"
+        type: "bar", orientation: "h", showlegend: false, xaxis: i ? "x2" : "x", yaxis: i ? "y2" : "y",
+        y: f.map(function (r) { return pn.robusta(r) ? r.t + " •" : r.t; }), x: f.map(function (r) { return r.g2; }),
+        marker: { color: pn.color },
+        customdata: f.map(function (r) { return [pn.usos(r), pn.otros(r), num(r.g2, 1)]; }),
+        hovertemplate: "<b>%{y}</b><br>" + pn.propio + " %{customdata[0]} veces · " + pn.otro + " %{customdata[1]}<br>G² %{customdata[2]}<extra></extra>"
       };
-    }
-    var data = [traza(izquierda, "x", "y"), traza(derecha, "x2", "y2")];
-    var alto = angosto ? 2 * (n * 22 + 60) : n * 26 + 90;
+    });
     var tickY = { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: angosto ? 11 : 12.5 }, ticksuffix: "  " };
     var layout = base(T, {
-      height: alto, bargap: 0.28, margin: { l: angosto ? 132 : 150, r: 16, t: 40, b: 36 },
-      xaxis: eje(T, { domain: dom1.x, anchor: "y", title: "Qué tan propia (z)", rangemode: "tozero" }),
-      yaxis: eje(T, Object.assign({ domain: dom1.y, anchor: "x" }, tickY)),
-      xaxis2: eje(T, { domain: dom2.x, anchor: "y2", title: "Qué tan propia (z)", rangemode: "tozero" }),
-      yaxis2: eje(T, Object.assign({ domain: dom2.y, anchor: "x2" }, tickY)),
-      annotations: [
-        { text: "<b>" + izquierda.titulo + "</b>", xref: "paper", yref: "paper", x: angosto ? 0 : dom1.x[0], y: dom1.y[1], xanchor: "left", yanchor: "bottom", yshift: 8, showarrow: false, font: { color: T.ink, size: 13 } },
-        { text: "<b>" + derecha.titulo + "</b>", xref: "paper", yref: "paper", x: angosto ? 0 : dom2.x[0], y: dom2.y[1], xanchor: "left", yanchor: "bottom", yshift: 8, showarrow: false, font: { color: T.ink, size: 13 } }
-      ]
+      height: angosto ? 2 * (n * 22 + 60) : n * 26 + 90, bargap: 0.28, margin: { l: angosto ? 140 : 160, r: 16, t: 40, b: 36 },
+      xaxis: eje(T, { domain: dom[0].x, anchor: "y", title: "G²", rangemode: "tozero" }),
+      yaxis: eje(T, Object.assign({ domain: dom[0].y, anchor: "x" }, tickY)),
+      xaxis2: eje(T, { domain: dom[1].x, anchor: "y2", title: "G²", rangemode: "tozero" }),
+      yaxis2: eje(T, Object.assign({ domain: dom[1].y, anchor: "x2" }, tickY)),
+      annotations: paneles.map(function (pn, i) {
+        return { text: "<b>" + pn.titulo + "</b>", xref: "paper", yref: "paper", x: dom[i].x[0], y: dom[i].y[1],
+                 xanchor: "left", yanchor: "bottom", yshift: 8, xshift: angosto ? -140 : (i ? -150 : -160), showarrow: false,
+                 font: { color: T.ink, size: 13 } };
+      })
     });
-    if (!angosto) { layout.annotations[1].x = dom2.x[0]; layout.annotations[1].xshift = -130; layout.annotations[0].xshift = -140; }
     Plotly.react(id, data, layout, CONFIG);
+  }
+  function robusta(c, lado) {
+    return function (r) { return D.robustas.some(function (x) { return x.c === c && x.lado === lado && x.t === r.t; }); };
   }
 
   var CMP = "carrera";
   function figPalabras(T) {
-    var P = D.palabras.filter(function (r) { return r.c === CMP; });
-    panelesPalabras(T, "fig-palabras",
-      { titulo: "Boric", color: T.izq, filas: P.filter(function (r) { return r.lado === "Boric"; }), propio: "Boric", otro: "Kast",
-        usos: function (r) { return r.a; }, otros: function (r) { return r.b; } },
-      { titulo: "Kast", color: T.der, filas: P.filter(function (r) { return r.lado === "Kast"; }), propio: "Kast", otro: "Boric",
-        usos: function (r) { return r.b; }, otros: function (r) { return r.a; } });
+    var K = D.keyness.filter(function (r) { return r.c === CMP; });
+    panelesG2(T, "fig-palabras", [
+      { titulo: "Boric", color: T.izq, filas: K.filter(function (r) { return r.lado === "Boric"; }), propio: "Boric", otro: "Kast",
+        usos: function (r) { return r.a; }, otros: function (r) { return r.b; }, robusta: robusta(CMP, "Boric") },
+      { titulo: "Kast", color: T.der, filas: K.filter(function (r) { return r.lado === "Kast"; }), propio: "Kast", otro: "Boric",
+        usos: function (r) { return r.b; }, otros: function (r) { return r.a; }, robusta: robusta(CMP, "Kast") }]);
   }
   function figBloque(T) {
-    panelesPalabras(T, "fig-bloque",
-      { titulo: "Kast frente al resto de la derecha", color: T.der, filas: D.palabras.filter(function (r) { return r.c === "kast_bloque"; }),
-        propio: "Kast", otro: "resto de la derecha", usos: function (r) { return r.a; }, otros: function (r) { return r.b; } },
-      { titulo: "Boric frente al resto de la izquierda", color: T.izq, filas: D.palabras.filter(function (r) { return r.c === "boric_bloque"; }),
-        propio: "Boric", otro: "resto de la izquierda", usos: function (r) { return r.a; }, otros: function (r) { return r.b; } });
+    panelesG2(T, "fig-bloque", [
+      { titulo: "Kast frente al resto de la derecha", color: T.der, filas: D.keyness.filter(function (r) { return r.c === "kast_bloque" && r.lado === "Kast"; }),
+        propio: "Kast", otro: "resto de la derecha", usos: function (r) { return r.a; }, otros: function (r) { return r.b; }, robusta: robusta("kast_bloque", "Kast") },
+      { titulo: "Boric frente al resto de la izquierda", color: T.izq, filas: D.keyness.filter(function (r) { return r.c === "boric_bloque" && r.lado === "Boric"; }),
+        propio: "Boric", otro: "resto de la izquierda", usos: function (r) { return r.a; }, otros: function (r) { return r.b; }, robusta: robusta("boric_bloque", "Boric") }]);
   }
 
-  // Figura 4 ------------------------------------------------------------------
+  // Figura 4, redes ------------------------------------------------------------------
+  function figRedes(T) {
+    var angosto = ancho("fig-redes") < 600;
+    var dom = dos(angosto);
+    var data = [], ann = [];
+    ["Boric", "Kast"].forEach(function (q, i) {
+      var R0 = D.redes[q];
+      var grado = {};
+      R0.aristas.forEach(function (a) { grado[a.de] = (grado[a.de] || 0) + 1; grado[a.a] = (grado[a.a] || 0) + 1; });
+      var R = { nodos: R0.nodos.filter(function (n) { return grado[n.t]; }), aristas: R0.aristas };
+      var orden = R.nodos.map(function (n) { return n.n; }).sort(function (a, b) { return b - a; });
+      var umbral = orden[Math.min(21, orden.length - 1)];
+      var xs = R.nodos.map(function (n) { return n.x; }), ys = R.nodos.map(function (n) { return n.y; });
+      var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+      var pos = {};
+      R.nodos.forEach(function (n) { pos[n.t] = [(n.x - x0) / (x1 - x0), (n.y - y0) / (y1 - y0)]; });
+      var ex = [], ey = [];
+      R.aristas.forEach(function (a) { var p = pos[a.de], r = pos[a.a]; if (p && r) { ex.push(p[0], r[0], null); ey.push(p[1], r[1], null); } });
+      var xa = i ? "x2" : "x", ya = i ? "y2" : "y";
+      data.push({ type: "scatter", mode: "lines", x: ex, y: ey, xaxis: xa, yaxis: ya, hoverinfo: "skip", showlegend: false,
+                  line: { color: T.axis, width: 0.8 } });
+      var nmax = Math.max.apply(null, R.nodos.map(function (n) { return n.n; }));
+      data.push({ type: "scatter", mode: "markers+text", xaxis: xa, yaxis: ya, showlegend: false,
+                  x: R.nodos.map(function (n) { return pos[n.t][0]; }), y: R.nodos.map(function (n) { return pos[n.t][1]; }),
+                  text: R.nodos.map(function (n) { return n.n >= umbral ? n.t : ""; }), textposition: "top center",
+                  hovertext: R.nodos.map(function (n) { return n.t; }),
+                  textfont: { size: angosto ? 10 : 11, color: T.ink2 },
+                  marker: { size: R.nodos.map(function (n) { return 6 + 16 * Math.sqrt(n.n / nmax); }),
+                            color: R.nodos.map(function (n) { return n.propio ? COLOR(T, q) : T.neutro; }),
+                            line: { color: T.surface, width: 1.5 } },
+                  customdata: R.nodos.map(function (n) { return n.n; }),
+                  hovertemplate: "<b>%{hovertext}</b><br>%{customdata} veces<extra>" + q + "</extra>" });
+      ann.push({ text: "<b>" + q + "</b>", xref: "paper", yref: "paper", x: dom[i].x[0], y: dom[i].y[1], xanchor: "left", yanchor: "bottom",
+                 yshift: 6, showarrow: false, font: { color: T.ink, size: 13 } });
+    });
+    var ocultar = { showgrid: false, showticklabels: false, showline: false, zeroline: false, fixedrange: true, range: [-0.08, 1.08] };
+    var layout = base(T, {
+      height: angosto ? 940 : 600, margin: { l: 8, r: 8, t: 36, b: 8 }, annotations: ann,
+      xaxis: Object.assign({ domain: dom[0].x, anchor: "y" }, ocultar), yaxis: Object.assign({ domain: dom[0].y, anchor: "x" }, ocultar),
+      xaxis2: Object.assign({ domain: dom[1].x, anchor: "y2" }, ocultar), yaxis2: Object.assign({ domain: dom[1].y, anchor: "x2" }, ocultar)
+    });
+    Plotly.react("fig-redes", data, layout, CONFIG);
+  }
+
+  // Figura 6, copatrocinio -----------------------------------------------------------
+  function figCopatrocinio(T) {
+    var per = ["2002-2006", "2006-2010", "2010-2014", "2014-2018", "2018-2022"];
+    var corto = ancho("fig-copatrocinio") < 560;
+    var ticks = per.map(function (p) { return corto ? p.slice(2, 4) + "-" + p.slice(7, 9) : p; });
+    var data = [{
+      type: "scatter", mode: "lines+markers", name: "Mediana de la Cámara",
+      x: D.cop_medianas.map(function (m) { return m.periodo; }), y: D.cop_medianas.map(function (m) { return 100 * m.transversales; }),
+      line: { color: T.neutro, width: 2, dash: "dot" }, marker: { size: 7, color: T.neutro },
+      customdata: D.cop_medianas.map(function (m) { return [pct(m.transversales), m.diputados, num(m.distintos, 0)]; }),
+      hovertemplate: "Mediana de la Cámara · %{x}<br>%{customdata[0]} de mociones transversales<br>%{customdata[2]} cofirmantes distintos (mediana)<extra></extra>"
+    }];
+    ["Kast", "Boric"].forEach(function (q) {
+      var f = D.copatrocinio.filter(function (c) { return c.q === q; });
+      data.push({
+        type: "scatter", mode: "lines+markers", name: q, x: f.map(function (c) { return c.periodo; }), y: f.map(function (c) { return 100 * c.transversales; }),
+        line: { color: COLOR(T, q), width: 2 }, marker: { size: 9, color: COLOR(T, q), line: { color: T.surface, width: 2 } },
+        customdata: f.map(function (c) { return [pct(c.transversales), num(100 * c.transversales_pct, 0), c.mociones, c.distintos]; }),
+        hovertemplate: "<b>" + q + "</b> · %{x}<br>%{customdata[0]} de sus %{customdata[2]} mociones con el otro bloque<br>Percentil %{customdata[1]} · %{customdata[3]} cofirmantes distintos<extra></extra>"
+      });
+    });
+    var layout = base(T, {
+      height: 340, margin: { l: 48, r: 16, t: 40, b: 44 },
+      xaxis: eje(T, { categoryorder: "array", categoryarray: per, tickvals: per, ticktext: ticks, tickangle: 0, showgrid: false, showline: true }),
+      yaxis: eje(T, { range: [0, 70], ticksuffix: "%", dtick: 20, title: "Mociones con el otro bloque" })
+    });
+    Plotly.react("fig-copatrocinio", data, layout, CONFIG);
+  }
+
+  // Figura 7 ------------------------------------------------------------------
   function figLabor(T) {
     var tipos = ["Peticiones de oficio", "Mociones", "Intervenciones en Sala", "Proyectos de acuerdo", "Proyectos de resolución",
                  "Intervenciones en comisión", "Permisos", "Licencias médicas"];
@@ -387,7 +583,7 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     Plotly.react("fig-labor", data, layout, CONFIG);
   }
 
-  // Figura 5 ------------------------------------------------------------------
+  // Figura 8 ------------------------------------------------------------------
   function figOficios(T) {
     var annos = []; for (var a = 2010; a <= 2022; a++) annos.push(a);
     function camara(a) { var f = D.oficios_camara.filter(function (r) { return r.anno === a; })[0]; return f ? f.oficios : null; }
@@ -405,7 +601,6 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     Plotly.react("fig-oficios", data, layout, CONFIG);
   }
 
-  // Selector de la Figura 2
   var botones = document.querySelectorAll(".selector button");
   botones.forEach(function (b) {
     b.addEventListener("click", function () {
@@ -415,7 +610,7 @@ tr.grupo td { font-weight: 700; color: var(--ink); background: var(--page); }
     });
   });
 
-  function todo() { var T = tok(); figVolumen(T); figPalabras(T); figBloque(T); figLabor(T); figOficios(T); }
+  function todo() { var T = tok(); figVolumen(T); figPalabras(T); figRedes(T); figBloque(T); figCopatrocinio(T); figLabor(T); figOficios(T); }
   todo();
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");

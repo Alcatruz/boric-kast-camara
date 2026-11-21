@@ -3,10 +3,10 @@
 # datos/datos2.js, con lo mínimo que necesitan los gráficos.
 #
 # Se corre desde la RAÍZ del proyecto bcall_nominate_chile/, después de
-# 04_textos.R y 05_biografia.R:
+# 04_textos.R, 05_biografia.R, 07_copatrocinio.R y 08_texto_medidas.R:
 #   Rscript post_boric_kast/R/06_parte2.R
 #
-# Además de lo que dejan 04 y 05, pide a Labor Parlamentaria las facetas de
+# Además de lo que dejan esos scripts, pide a Labor Parlamentaria las facetas de
 # cada persona por año (una consulta por año en que fue diputado), para
 # separar las peticiones de oficio del resto. Las respuestas quedan en la
 # caché de congresochile.
@@ -20,40 +20,10 @@ suppressPackageStartupMessages({
 })
 
 DIR <- "outputs/data/post_boric_kast"
-dist <- readRDS(file.path(DIR, "textos_distintivas.rds"))
 disc <- readRDS(file.path(DIR, "textos_discursos.rds")) |> filter(!is.na(quien))
 bio  <- readRDS(file.path(DIR, "biografia.rds"))
 
 r2 <- function(x) round(x, 2)
-
-# --- Palabras distintivas ------------------------------------------------------
-# Una palabra suelta no se muestra si al menos la mitad de sus usos, del lado
-# que la distingue, está dentro de un bigrama que también está entre los 40
-# primeros de ese lado ("derechos humanos" deja fuera a "humanos" y a
-# "derechos"; "educación superior", que es el 16% de "educación", no).
-tope <- function(cmp, clave, n, lados = NULL) {
-  d <- dist |> filter(comparacion == cmp)
-  if (!is.null(lados)) d <- d |> filter(lado %in% lados)
-  d |> group_by(lado) |> slice_max(abs(z), n = 40, with_ties = FALSE) |>
-    mutate(usos = if_else(z > 0, ya, yb)) |>
-    group_modify(function(g, k) {
-      bi <- g |> filter(grepl(" ", termino))
-      dentro <- vapply(seq_len(nrow(g)), function(i) {
-        if (grepl(" ", g$termino[i])) return(FALSE)
-        b <- bi |> filter(vapply(strsplit(termino, " "), function(w) g$termino[i] %in% w, logical(1)))
-        nrow(b) > 0 && max(b$usos) / g$usos[i] >= 0.5
-      }, logical(1))
-      g[!dentro, ]
-    }) |>
-    slice_max(abs(z), n = n, with_ties = FALSE) |> ungroup() |>
-    transmute(c = clave, lado, t = termino, z = r2(z), a = ya, b = yb)
-}
-palabras <- bind_rows(
-  tope("Boric y Kast, toda su carrera", "carrera", 15),
-  tope("Boric y Kast, 2014-2018", "p1418", 15),
-  tope("Kast y el resto de la derecha, 2002-2018", "kast_bloque", 14, "Kast"),
-  tope("Boric y el resto de la izquierda, 2014-2022", "boric_bloque", 14, "Boric")
-)
 
 # --- Discursos por año -----------------------------------------------------------
 volumen <- disc |> mutate(anno = as.integer(format(fecha, "%Y"))) |>
@@ -107,8 +77,38 @@ labor_tipos <- bio$labor_tipos |>
 
 print.data.frame(labor_anno)
 
-datos <- list(palabras = palabras, volumen = volumen, periodos = periodos, militancias = militancias,
-              labor_anno = labor_anno, labor_tipos = labor_tipos, oficios_camara = oficios_camara)
+# --- Copatrocinio (07_copatrocinio.R) ------------------------------------------------
+cop <- readRDS(file.path(DIR, "copatrocinio.rds"))
+nombre_corto <- function(x) sub("^(\\S+)(?: \\S+)?, (.*)$", "\\2 \\1", x, perl = TRUE)
+copatrocinio <- cop$bk |>
+  transmute(q = quien, periodo, mociones, transversales = r2(transversales), otro_bloque = r2(otro_bloque),
+            distintos, transversales_pct = r2(transversales_pct), distintos_pct = r2(distintos_pct))
+cop_medianas <- cop$medianas |>
+  transmute(periodo, diputados, transversales = r2(transversales), distintos)
+socios <- cop$socios |>
+  group_by(quien, periodo) |> slice_max(mociones_juntos, n = 4, with_ties = FALSE) |> ungroup() |>
+  transmute(q = quien, periodo, nombre = nombre_corto(nombre_completo), partido, n = mociones_juntos)
+
+# --- Medidas de texto (08_texto_medidas.R) --------------------------------------------
+med <- readRDS(file.path(DIR, "textos_medidas.rds"))
+limpio <- function(x) gsub("_", " ", x)
+keyness <- med$keyness |>
+  group_by(comparacion, lado) |> slice_max(abs(g2), n = 15, with_ties = FALSE) |> ungroup() |>
+  transmute(c = comparacion, lado, t = limpio(termino), g2 = round(abs(g2), 1), a = ya, b = yb)
+robustas <- med$robustas |> transmute(c = comparacion, lado, t = limpio(termino))
+acuerdo <- med$acuerdo
+tfidf <- med$tfidf |> group_by(quien, periodo) |> slice_head(n = 6) |> ungroup() |>
+  transmute(q = quien, periodo, t = limpio(termino), n)
+redes <- lapply(med$redes, function(r) list(
+  nodos = r$nodos |> transmute(t = limpio(termino), n, x = round(x, 3), y = round(y, 3), propio),
+  aristas = r$aristas |> transmute(de = limpio(de), a = limpio(a), peso)))
+pegar <- function(x) gsub("\\( ", "(", gsub(" ([.,;:!?)])", "\\1", x))
+kwic <- med$kwic |> transmute(q = quien, t = termino, antes = pegar(antes), despues = pegar(despues))
+
+datos <- list(volumen = volumen, periodos = periodos, militancias = militancias,
+              labor_anno = labor_anno, labor_tipos = labor_tipos, oficios_camara = oficios_camara,
+              copatrocinio = copatrocinio, cop_medianas = cop_medianas, socios = socios,
+              keyness = keyness, robustas = robustas, acuerdo = acuerdo, tfidf = tfidf, redes = redes, kwic = kwic)
 js <- paste0("window.BK2 = ", jsonlite::toJSON(datos, dataframe = "rows", auto_unbox = TRUE, na = "null"), ";\n")
 writeLines(js, "post_boric_kast/datos/datos2.js", useBytes = TRUE)
 cat("escrito post_boric_kast/datos/datos2.js,", nchar(js), "caracteres\n")
