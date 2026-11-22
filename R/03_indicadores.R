@@ -10,9 +10,15 @@
 #   glm logit. Variable dependiente, haber asumido después como senador o
 #   presidente. Predictores medidos en el último período del diputado en la
 #   Cámara, en percentiles dentro de ese período para que sean comparables
-#   entre estimaciones separadas. extremo_pct es la distancia de d1 a la
-#   mediana de la Cámara. Efectos fijos por último período, porque el número
-#   de cupos al Senado cambia según el calendario de renovación.
+#   entre estimaciones separadas. flanco_pct es la posición dentro del propio
+#   bloque B-Call, del diputado más central del bloque (0) al de su borde (1),
+#   con -d1 en la izquierda y d1 en la derecha. No se usa la distancia a la
+#   mediana de la Cámara (extremo_pct de 01_base.R) porque, con d1 partido en
+#   dos bloques, la mediana cae en el borde interior del bloque más grande y
+#   todo el otro bloque queda lejos. Esa distancia mide sobre todo en qué
+#   bloque está el diputado (Spearman 0,68 con estar en el bloque lejano).
+#   Efectos fijos por último período, porque el número de cupos al Senado
+#   cambia según el calendario de renovación.
 #
 # ESCRIBE
 #   post_boric_kast/datos/*.csv y post_boric_kast/datos/datos.js
@@ -60,15 +66,21 @@ print(as.data.frame(rice_tab))
 # ---------------------------------------------------------------------------
 # Modelo de carreras
 # ---------------------------------------------------------------------------
-m <- glm(sube ~ extremo_pct + d2_pct + participacion + factor(periodo),
+flanco <- dp %>% group_by(periodo, bloque) %>%
+  mutate(flanco_pct = percent_rank(if_else(bloque == "left", -d1, d1))) %>%
+  ungroup() %>% select(periodo, id_parlamentario, flanco_pct)
+carreras <- carreras %>% left_join(flanco, by = c("periodo", "id_parlamentario"))
+stopifnot(!anyNA(carreras$flanco_pct))
+
+m <- glm(sube ~ flanco_pct + d2_pct + participacion + factor(periodo),
          family = binomial, data = carreras)
 print(summary(m))
-coefs <- summary(m)$coefficients[c("extremo_pct", "d2_pct", "participacion"), ]
+coefs <- summary(m)$coefficients[c("flanco_pct", "d2_pct", "participacion"), ]
 modelo <- tibble(variable = rownames(coefs), coef = coefs[, 1], ee = coefs[, 2], p = coefs[, 4],
                  odds = exp(coefs[, 1]))
 print(as.data.frame(modelo %>% mutate(across(where(is.double), r3))))
 desc_carr <- carreras %>% group_by(destino) %>%
-  summarise(n = n(), cuartil_d2_sup = mean(d2_pct >= 0.75), extremo_pct = mean(extremo_pct),
+  summarise(n = n(), cuartil_d2_sup = mean(d2_pct >= 0.75), flanco_pct = mean(flanco_pct),
             d2_pct = mean(d2_pct), .groups = "drop")
 print(as.data.frame(desc_carr %>% mutate(across(where(is.double), r3))))
 
@@ -98,7 +110,7 @@ write_csv(tray, file.path(REPO, "trayectorias_boric_kast.csv"))
 write_csv(bk_mat, file.path(REPO, "contra_bloque_materia.csv"))
 write_csv(valid, file.path(REPO, "validacion_materias.csv"))
 write_csv(carreras %>% transmute(nombre_completo, ultimo_periodo = periodo, partido, destino,
-                                 extremo_pct = r3(extremo_pct), d2_pct = r3(d2_pct), participacion = r3(participacion)),
+                                 flanco_pct = r3(flanco_pct), d2_pct = r3(d2_pct), participacion = r3(participacion)),
           file.path(REPO, "carreras.csv"))
 
 datos <- list(
@@ -107,7 +119,7 @@ datos <- list(
   modelo = modelo %>% mutate(across(where(is.double), r3)),
   desc_carr = desc_carr %>% mutate(across(where(is.double), r3)),
   carreras = carreras %>% transmute(n = sub("^(.*), (.*)$", "\\2 \\1", nombre_completo), p = periodo, pa = partido,
-                                    destino, x = r3(extremo_pct), y = r3(d2_pct)),
+                                    destino, x = r3(flanco_pct), y = r3(d2_pct)),
   tray = tray %>% mutate(across(where(is.double), r3)),
   camara_1418 = camara_1418,
   materia = bk_mat %>% mutate(across(where(is.double), r3)),

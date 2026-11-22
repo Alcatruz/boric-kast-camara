@@ -206,17 +206,17 @@ nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(
 
 <div class="col">
   <h2>¿Patrón o excepción?</h2>
-  <p>Boric y Kast son dos casos, y con dos casos no se prueba nada. Por eso miré a todos los diputados que dejaron la Cámara entre 2006 y 2026. De 364, 59 llegaron después al Senado y 2 a la Presidencia. En un modelo logit con el último período de cada uno, ser más extremo se asocia con subir. Pasar del centro al borde de la sala multiplica por 2,8 las chances, aunque el resultado está al límite de la significancia (p = 0,048). La dispersión del voto, en cambio, no tiene relación con subir (p = 0,98), y quienes llegaron al Senado están en el cuartil más disperso tan seguido como el resto (Figura 5). El ascenso premia estar en los polos, no votar disperso.</p>
+  <p>Boric y Kast son dos casos, y con dos casos no se prueba nada. Por eso miré a todos los diputados que dejaron la Cámara entre 2006 y 2026. De 364, 59 llegaron después al Senado y 2 a la Presidencia. En un modelo logit con el último período de cada uno, estar más cerca del borde del propio bloque se asocia con subir, pero la señal es débil. Pasar del diputado más central de su bloque al del borde multiplica por 2,4 las chances, con un p de 0,065, que no alcanza la significancia convencional. La dispersión del voto no tiene relación con subir (p = 0,58), y quienes llegaron al Senado están en el cuartil más disperso tan seguido como el resto (Figura 5). Si el ascenso premia algo, es estar en los polos y no votar disperso, y aun eso es incierto.</p>
 </div>
 
 <figure class="ancho">
-  <div class="grafico"><div id="fig-carreras" class="lienzo" role="img" aria-label="Extremismo y dispersión de los diputados que dejaron la Cámara, según si llegaron al Senado o a la Presidencia"></div></div>
-  <figcaption><b>Figura 5.</b> Distancia al centro de la sala y dispersión del voto, en percentiles, de los 364 diputados que dejaron la Cámara entre 2006 y 2026, medidas en su último período. En color, quienes llegaron después al Senado o a la Presidencia.</figcaption>
+  <div class="grafico"><div id="fig-carreras" class="lienzo" role="img" aria-label="Posición hacia el borde del propio bloque y dispersión del voto de los diputados que dejaron la Cámara, según si llegaron al Senado o a la Presidencia"></div></div>
+  <figcaption><b>Figura 5.</b> Posición dentro del propio bloque, del centro al borde, y dispersión del voto, en percentiles, de los 364 diputados que dejaron la Cámara entre 2006 y 2026, medidas en su último período. En color, quienes llegaron después al Senado o a la Presidencia.</figcaption>
 </figure>
 
 <div class="col">
   <h2>Lo que dice y lo que no</h2>
-  <p>Con dos casos no se puede decir que la conducta en la Cámara anticipó el presente. Pero el cuadro calza. En el mismo lapso en que la sala se partió en dos bloques que chocan cada vez más, las carreras que suben vienen de los polos, y los dos diputados más alejados del centro en 2014-2018 llegaron al gobierno, uno detrás del otro. Los dos que menos votaban con su bloque terminaron conduciéndolo.</p>
+  <p>Con dos casos no se puede decir que la conducta en la Cámara anticipó el presente. Pero el cuadro calza en parte. En el mismo lapso en que la sala se partió en dos bloques que chocan cada vez más, los dos diputados más alejados del centro en 2014-2018 llegaron al gobierno, uno detrás del otro, y en el resto de la Cámara las carreras que suben vienen algo más seguido del borde de cada bloque. Los dos que menos votaban con su bloque terminaron conduciéndolo.</p>
   <p>La <a href="parte2.html">segunda parte</a> mira lo que decían en la Sala y cómo fue su paso por la Cámara.</p>
 
   <h3>Datos, código y decisiones</h3>
@@ -225,7 +225,7 @@ nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(
     <li>El lado de un bloque o partido en una votación es la opción, a favor o en contra, que eligió la mayoría de sus miembros. Si empatan, la votación no cuenta. Abstenerse cuando el bloque tiene lado cuenta como no ir con él.</li>
     <li>El Rice se calcula por partido y votación, con partidos que tienen al menos tres diputados votando, y se promedia en el período. El partido es la última militancia que registra la Cámara dentro de cada período, por eso Kast aparece como independiente en 2014-2018 y Boric como Convergencia Social en 2018-2022.</li>
     <li>Las materias se asignaron por el título de cada proyecto, con diccionarios armados mirando solo una mitad de los proyectos con descriptores temáticos de la BCN y medidos una sola vez en la otra mitad, de 1.380 proyectos. El acuerdo con los descriptores, medido con kappa, es de 0,77 en seguridad, 0,69 en economía, 0,78 en lo político-institucional y 0,80 en temas valóricos, donde la muestra de prueba tiene solo 8 casos.</li>
-    <li>Las carreras salen de los cargos que registra la BCN. Se cuentan los diputados cuyo último período en la Cámara empezó en 2022 o antes y que asumieron después como senadores o presidentes. El modelo es un logit con el percentil de distancia al centro, el de <span class="var">d2</span> y la participación en su último período, más efectos fijos por ese período.</li>
+    <li>Las carreras salen de los cargos que registra la BCN. Se cuentan los diputados cuyo último período en la Cámara empezó en 2022 o antes y que asumieron después como senadores o presidentes. El modelo es un logit con el percentil de posición dentro del propio bloque B-Call, del más central (0) al del borde (100), el de <span class="var">d2</span> y la participación en su último período, más efectos fijos por ese período. La posición se mide dentro del bloque y no como distancia a la mediana de la Cámara porque, con la sala partida en dos bloques, la mediana cae en el borde interior del bloque más grande y esa distancia termina midiendo en qué bloque está cada diputado.</li>
     <li>El código está en el <a href="https://github.com/Alcatruz/boric-kast-camara">repositorio</a>.</li>
   </ul>
 
@@ -430,13 +430,13 @@ nav.partes a[aria-current="page"] { color: var(--ink); border-bottom-color: var(
         text: pres ? f.map(function (c) { return c.n.indexOf("Boric") >= 0 ? "Boric" : "Kast"; }) : undefined,
         textposition: "middle left", textfont: { color: T.ink, size: 13 },
         customdata: f.map(function (c) { return [c.n, c.pa, c.p, num(100 * c.x, 0), num(100 * c.y, 0)]; }),
-        hovertemplate: "<b>%{customdata[0]}</b> · %{customdata[1]}<br>Último período %{customdata[2]}<br>Distancia al centro, percentil %{customdata[3]}<br>d2, percentil %{customdata[4]}<extra></extra>",
+        hovertemplate: "<b>%{customdata[0]}</b> · %{customdata[1]}<br>Último período %{customdata[2]}<br>Hacia el borde del bloque, percentil %{customdata[3]}<br>d2, percentil %{customdata[4]}<extra></extra>",
         marker: { size: g[3], color: g[2], opacity: g[0] === "Ninguno" ? 0.8 : 1, line: { color: T.surface, width: 1.5 } }
       };
     });
     var layout = base(T, {
       height: ancho("fig-carreras") < 560 ? 440 : 460, margin: { l: 52, r: 16, t: 40, b: 52 },
-      xaxis: eje(T, { range: [-3, 103], dtick: 25, title: "Distancia al centro de la sala (percentil)" }),
+      xaxis: eje(T, { range: [-3, 103], dtick: 25, title: "Hacia el borde de su bloque (percentil)" }),
       yaxis: eje(T, { range: [-3, 103], dtick: 25, title: "Dispersión del voto, d2 (percentil)" })
     });
     Plotly.react("fig-carreras", data, layout, CONFIG);
