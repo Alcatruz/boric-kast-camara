@@ -7,11 +7,13 @@
 #   Rscript post_boric_kast/R/08_texto_medidas.R
 #
 # MEDIDAS
-#   - Keyness de Boric frente a Kast con la razón de verosimilitud G² (Dunning,
-#     1993) y con chi² con corrección de Yates, las dos medidas de
-#     quanteda.textstats::textstat_keyness, calculadas aquí con sus fórmulas.
-#     Se agrega el log-odds con prior informativo de 04_textos.R (Monroe et
-#     al., 2008), con el prior de toda la Cámara del período.
+#   - Keyness de Boric frente a Kast con quanteda.textstats::textstat_keyness,
+#     con sus valores por defecto. La razón de verosimilitud G² sobre la tabla
+#     de 2x2 (measure = "lr", con la corrección de Williams) y chi²
+#     (measure = "chi2", con la corrección de Yates cuando alguna frecuencia
+#     esperada es menor que 5). Se agrega el log-odds con prior informativo
+#     de 04_textos.R (Monroe et al., 2008), con el prior de toda la Cámara del
+#     período, que no está en el paquete y se calcula con su fórmula.
 #   - TF-IDF por diputado y período (quanteda::dfm_tfidf, frecuencia relativa
 #     por la inversa de la frecuencia de documentos). Cada documento son
 #     todos los discursos de un diputado en un período, contra el resto de la
@@ -47,6 +49,7 @@ suppressPackageStartupMessages({
   library(tidyr)
   library(stringr)
   library(quanteda)
+  library(quanteda.textstats)
   library(ggplot2)
   library(ggwordcloud)
   library(igraph)
@@ -87,23 +90,23 @@ dfmat <- dfm(toks_s)
 
 # --- Keyness -----------------------------------------------------------------
 keyness <- function(sub_a, sub_b, fondo, etiqueta, a = "Boric", b = "Kast", alfa0 = 10000, min_n = 8, min_doc = 4) {
-  ca <- colSums(dfm_subset(dfmat, sub_a)); cb <- colSums(dfm_subset(dfmat, sub_b))
-  docs <- colSums(dfm_subset(dfmat, sub_a | sub_b) > 0)
+  sub_a <- sub_a %in% TRUE; sub_b <- sub_b %in% TRUE; fondo <- fondo %in% TRUE
+  m <- dfm_subset(dfmat, sub_a | sub_b)
+  objetivo <- sub_a[sub_a | sub_b]
+  # G² y chi² del paquete, sin ordenar, para que las filas sigan el orden de los términos de m
+  lr <- textstat_keyness(m, target = objetivo, measure = "lr", sort = FALSE)
+  ch <- textstat_keyness(m, target = objetivo, measure = "chi2", sort = FALSE)
+  stopifnot(identical(lr$feature, featnames(m)), identical(ch$feature, featnames(m)))
+  docs <- colSums(m > 0)
   f <- colSums(dfm_subset(dfmat, fondo))
-  na <- sum(ca); nb <- sum(cb)
-  tibble(termino = featnames(dfmat), ya = as.numeric(ca), yb = as.numeric(cb), discursos = as.numeric(docs),
-         fondo = as.numeric(f)) |>
+  na <- sum(lr$n_target); nb <- sum(lr$n_reference)
+  tibble(termino = lr$feature, ya = as.numeric(lr$n_target), yb = as.numeric(lr$n_reference),
+         discursos = as.numeric(docs), fondo = as.numeric(f), g2 = lr$G2, chi2 = ch$chi2) |>
     filter(ya + yb >= min_n, discursos >= min_doc) |>
-    mutate(e1 = na * (ya + yb) / (na + nb), e2 = nb * (ya + yb) / (na + nb),
-           g2 = 2 * (ifelse(ya > 0, ya * log(ya / e1), 0) + ifelse(yb > 0, yb * log(yb / e2), 0)),
-           N = na + nb, c_ = na - ya, d_ = nb - yb,
-           chi2 = N * pmax(abs(ya * d_ - yb * c_) - N / 2, 0)^2 / ((ya + yb) * (c_ + d_) * (ya + c_) * (yb + d_)),
-           signo = ifelse(ya / na >= yb / nb, 1, -1),
-           g2 = signo * g2, chi2 = signo * chi2,
-           alfa = alfa0 * fondo / sum(f),
+    mutate(alfa = alfa0 * fondo / sum(f),
            logodds = log((ya + alfa) / (na + alfa0 - ya - alfa)) - log((yb + alfa) / (nb + alfa0 - yb - alfa)),
            z = logodds / sqrt(1 / (ya + alfa) + 1 / (yb + alfa)),
-           lado = ifelse(signo > 0, a, b), comparacion = etiqueta) |>
+           lado = ifelse(ya / na >= yb / nb, a, b), comparacion = etiqueta) |>
     filter(alfa > 0) |>
     select(comparacion, termino, lado, ya, yb, g2, chi2, z)
 }
